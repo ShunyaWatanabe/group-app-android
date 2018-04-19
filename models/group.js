@@ -15,9 +15,7 @@ const groupSchema = mongoose.Schema({
 	creator:{type: Schema.Types.ObjectId, ref: 'user'},
 	members:[{type: Schema.Types.ObjectId, ref: 'user'}],
 	conversation: [{type: Schema.Types.ObjectId, ref: 'message'}],
-	},
-	{
-		timestamps: true;
+	timestamps: true
 	});
 
 mongoose.Promise = global.Promise;
