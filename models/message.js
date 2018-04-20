@@ -18,5 +18,5 @@ const messageSchema = mongoose.Schema({
 	});
 
 mongoose.Promise = global.Promise;
-mongoose.connect(config.db);
+mongoose.createConnection(config.db);
 module.exports = mongoose.model('message', messageSchema);
