@@ -6,6 +6,7 @@ const organization = require('../models/organization');
 exports.getProfile = privateKey =>
 
 	new Promise((resolve,reject) => {
+		console.log("pefect");
 		user.find({ private_key: 'owhxYgL70YMf' })
 			.then(users => {
 				console.log("PRIVATE KEY 3",privateKey);
