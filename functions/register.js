@@ -10,9 +10,11 @@ exports.registerUser = req =>
 		console.log("okb2");
 
 	    const salt = bcrypt.genSaltSync(10);
+	    console.log("okc1");
 		const hash = bcrypt.hashSync(req.body.password, salt);
+		console.log("okc2");
 		const refreshToken = randomstring.generate();
-		console.log("ok3");
+		console.log("okc3");
 		const newUser = new user({
 			name: req.body.name,
 
