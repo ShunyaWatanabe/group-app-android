@@ -21,7 +21,8 @@ exports.checkTokens = req =>
 			try {
 
   				var decoded = jwt.verify(token, config.secret);
-					console.log("test5");
+					console.log("test5", private_key);
+					console.log(decoded.message);
   				if(decoded.message === private_key){
 						console.log("test5.5");
   					resolve({ status: 200, message: "Correct token"});
