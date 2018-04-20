@@ -19,15 +19,14 @@ exports.registerUser = req =>
 
 			isVerified: true,
 		});
-		console.log("ok4");
+		
 		newUser.save(function(err){
 			if (err) console.log(err);
 		})
 	
 
 		.then(() => {
-			console.log("ok6");
-
+			
 			resolve({ status: 201, message: 'User created!', refresh_token: refreshToken,  })
 
 		})
