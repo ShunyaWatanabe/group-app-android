@@ -102,7 +102,7 @@ module.exports = router => {
 	//add a new user
 	router.post('/users/signup', (req, res) => {
 
-		// console.log("Name: " + req.body.name + " email: " + req.body.email + " pass: " + req.body.password);
+		console.log("Name: " + req.body.name +" private key "+req.body.private_key);
 
 		const name = req.body.name;
 		const private_key = req.body.private_key;
