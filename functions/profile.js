@@ -7,7 +7,7 @@ exports.getProfile = privateKey =>
 
 	new Promise((resolve,reject) => {
 
-		user.find({ private_key: "wP05EUCQQIXC" }
+		user.find({ private_key: privateKey }
 			.then(users => {
 			if (users.length == 0) {
 				console.log("PRIVATE KEY 3",privateKey);
