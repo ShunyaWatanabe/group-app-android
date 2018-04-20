@@ -8,8 +8,10 @@ exports.getProfile = privateKey =>
 	new Promise((resolve,reject) => {
 
 		user.find({ private_key: privateKey }
+			
 			.then(users => {
 				console.log("PRIVATE KEY 3",privateKey);
+				console.log(typeOf users);
 			if (users.length == 0) {
 				reject({ status: 404, message: 'User Not Found !' });
 			} else {
