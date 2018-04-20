@@ -8,8 +8,6 @@ const config = require('../config/config.json');
 exports.registerUser = req =>
 	new Promise((resolve,reject) => {
 	
-	    const salt = bcrypt.genSaltSync(10);
-	   
 		console.log("okc2");
 		const refreshToken = randomstring.generate();
 		console.log("okc3");
