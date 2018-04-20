@@ -76,7 +76,7 @@ module.exports = router => {
 	router.post('/users/relogin', (req, res) => {
 
 		var ob = JSON.stringify(req.body);
-
+		
 		checkingTokens.checkTokens(req)
 
 			.then(result => {
@@ -94,33 +94,19 @@ module.exports = router => {
 
 	//add a new user
 	router.post('/users/signup', (req, res) => {
-
 		console.log("Name: " + req.body.name); 
-
 		const name = req.body.name;
-		
-
 		if (!name  || !name.trim() ) {
-
 		console.log("error");
 			res.status(400).json({message: 'Invalid Request !'});
-
 		} else {
-
-		
 			register.registerUser(req)
-
 			.then(result => {
 				const token = jwt.sign(result, config.secret, { expiresIn: 20 });
-
-				
-
 				res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token})
 			})
-
 			.catch(err => {
 				res.status(err.status).json({ message: err.message })
-		
 		}
 	});
 
