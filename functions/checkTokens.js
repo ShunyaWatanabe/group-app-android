@@ -9,24 +9,25 @@ exports.checkTokens = req =>
 
 	new Promise((resolve,reject) => {
 
+		console.log("test1");
 		const token = req.headers['x-access-token'];
-
+		console.log("test2");
 		const refreshToken = req.headers['refresh-token'];
-
+		console.log("test3");
 		const private_key = req.headers['private_key'];
-
+		console.log("test4");
 		if (token) {
 
 			try {
 
   				var decoded = jwt.verify(token, config.secret);
-
+					console.log("test5");
   				if(decoded.message === private_key){
 
   					resolve({ status: 200, message: "Correct token"});
   				}
   				else{
-
+						console.log("test6");
   					user.find({ private_key: private_key }, {refresh_token:1})
 
 						.then(users => {
