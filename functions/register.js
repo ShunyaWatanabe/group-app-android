@@ -12,7 +12,7 @@ exports.registerUser = req =>
 	  const salt = bcrypt.genSaltSync(10);
 		const hash = bcrypt.hashSync(req.body.password, salt);
 		const refreshToken = randomstring.generate();
-
+		console.log("ok3");
 		const newUser = new user({
 			name: req.body.name,
 
@@ -22,10 +22,12 @@ exports.registerUser = req =>
 
 			isVerified: true,
 		});
+		console.log("ok4");
 		newUser.save()
+		console.log("ok5");
 
 		.then(() => {
-
+			console.log("ok6");
 
 			resolve({ status: 201, message: 'User created!', refresh_token: refreshToken,  })
 
@@ -33,6 +35,7 @@ exports.registerUser = req =>
 
 
 		.catch(err => {
+			console.log("ok7");
 			if (err.code == 11000) {
 
 				reject({ status: 409, message: 'User Already Registered !' });
