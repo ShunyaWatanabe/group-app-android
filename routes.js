@@ -147,18 +147,8 @@ module.exports = router => {
 					res.status(result.status).json(result1);
 				})
 
-				.reject(result=>{
-					console.log("Not Found him");
-					console.log(result);
-				})
-
 				.catch(err1 => res.status(err1.status).json({ message: err1.message }));
 
-			})
-
-			.reject(result=>{
-				console.log("Not Found him");
-				console.log(result);
 			})
 
 			.catch(err => res.status(err.status).json({ message: err.message }));
