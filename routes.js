@@ -150,6 +150,7 @@ module.exports = router => {
 
 				.catch(err1 => res.status(err1.status).json({ message: err1.message }));
 			})
+			//this does not work. WE HAVE TO FIX EVERYTHING
 			.catch(err => res.status(err.status).json({ message: err.message }));
 
 	});
