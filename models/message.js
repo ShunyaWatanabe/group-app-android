@@ -14,10 +14,10 @@ const messageSchema = mongoose.Schema({
 	group: {type: Schema.Types.ObjectId, required: true},
 	text: {type: String, required: true},
 	sender:{type: Schema.Types.ObjectId, ref: 'user'}
-	// timestamps: true
+	created_at: String,
 	});
 
 
 mongoose.Promise = global.Promise;
 var connection = mongoose.createConnection(config.db);
-module.exports = connection.model('user', userSchema);
+module.exports = connection.model('message', messageSchema);
