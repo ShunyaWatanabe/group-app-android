@@ -6,7 +6,6 @@ const randomstring = require("randomstring");
 const config = require('../config/config.json');
 
 exports.registerUser = req =>
-	console.log("okb1");
 	new Promise((resolve,reject) => {
 		console.log("okb2");
 
