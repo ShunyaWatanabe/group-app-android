@@ -1,17 +1,15 @@
 'use strict';
 
 const user = require('../models/user');
-const bcrypt = require('bcryptjs');
+
 const randomstring = require("randomstring");
 const config = require('../config/config.json');
 
 exports.registerUser = req =>
 	new Promise((resolve,reject) => {
-		console.log("okb2");
-
+	
 	    const salt = bcrypt.genSaltSync(10);
-	    console.log("okc1");
-		const hash = bcrypt.hashSync(req.body.password, salt);
+	   
 		console.log("okc2");
 		const refreshToken = randomstring.generate();
 		console.log("okc3");
