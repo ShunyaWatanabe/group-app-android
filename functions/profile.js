@@ -5,9 +5,10 @@ const user = require('../models/user');
 exports.getProfile = privateKey =>
 
 	new Promise((resolve,reject) => {
+		console.log("octobertest1");
 		user.find({ private_key: privateKey })
 			.then(users => {
-				console.log("octobertest1");
+
 				console.log("PRIVATE KEY 3",privateKey);
 			if (users.length == 0) {
 				console.log("PRIVATE KEY 4",privateKey);
