@@ -130,11 +130,11 @@ module.exports = router => {
 
 	//get the user profile details
 	router.get('/users/:private_key', (req,res) => {
-
+		console.log("Calling get profile");
 		checkingTokens.checkTokens(req)
 
 			.then(result => {
-
+				console.log("After tokens");
 				profile.getProfile(req.params.private_key)
 
 				.then(result1 =>{
