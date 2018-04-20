@@ -114,18 +114,41 @@ module.exports = router => {
 
 		} else {
 
-		console.log("ok");
 			register.registerUser(req)
 
 			.then(result => {
 				const token = jwt.sign(result, config.secret, { expiresIn: 20 });
-
-				//res.setHeader('Location', '/users/'+name);
 				res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token})
 			})
 
-			.catch(err => res.status(err.status).json({ message: err.message }));
+			.catch(err => {
+				res.status(err.status).json({ message: err.message })
+
 		}
+	});
+
+	//get the user profile details
+	router.get('/users/:private_key', (req,res) => {
+
+		checkingTokens.checkTokens(req)
+
+			.then(result => {
+
+				profile.getProfile(req.params.private_key)
+
+				.then(result1 =>{
+
+					result1 = createResponse(result, result1);
+
+					res.status(result.status).json(result1);
+				})
+
+				.catch(err1 => res.status(err1.status).json({ message: err1.message }));
+
+			})
+
+			.catch(err => res.status(err.status).json({ message: err.message }));
+
 	});
 
 
