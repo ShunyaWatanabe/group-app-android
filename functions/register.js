@@ -9,11 +9,12 @@ exports.registerUser = req =>
 	new Promise((resolve,reject) => {
 
 		const refreshToken = randomstring.generate();
+		const privateKey = randomstring.generate(12);
 
 		const newUser = new user({
 			name: req.body.name,
 
-			private_key:randomstring.generate(12),
+			private_key:privateKey,
 			created_at: new Date(),
 			refresh_token: refreshToken,
 
@@ -28,7 +29,7 @@ exports.registerUser = req =>
 		.then(() => {
 			console.log("ok6");
 
-			resolve({ status: 201, message: 'User created!', refresh_token: refreshToken,  private_key: private_key})
+			resolve({ status: 201, message: 'User created!', refresh_token: refreshToken,  private_key: privateKey})
 
 		})
 
