@@ -136,8 +136,8 @@ module.exports = router => {
 			.then(result => {
 				console.log("After tokens");
 				console.log("Params",req.params.private_key);
-				profile.getProfile(req.params.private_key)
-
+				//profile.getProfile(req.params.private_key)
+				profile.getProfile("string")
 				.then(result1 =>{
 					console.log("Found him");
 					// console.log(result1);
