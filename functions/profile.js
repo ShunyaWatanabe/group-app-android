@@ -3,7 +3,7 @@
 const user = require('../models/user');
 const organization = require('../models/organization');
 
-exports.getProfile = email =>
+exports.getProfile = private_key =>
 
 	new Promise((resolve,reject) => {
 
