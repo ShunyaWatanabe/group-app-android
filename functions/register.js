@@ -8,9 +8,8 @@ const config = require('../config/config.json');
 exports.registerUser = req =>
 	new Promise((resolve,reject) => {
 	
-		console.log("okc2");
 		const refreshToken = randomstring.generate();
-		console.log("okc3");
+		
 		const newUser = new user({
 			name: req.body.name,
 
@@ -21,7 +20,9 @@ exports.registerUser = req =>
 			isVerified: true,
 		});
 		console.log("ok4");
-		newUser.save()
+		newUser.save(function(err){
+			if (err) console.log(err);
+		})
 	
 
 		.then(() => {
