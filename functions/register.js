@@ -24,7 +24,7 @@ exports.registerUser = req =>
 		});
 		console.log("ok4");
 		newUser.save()
-		console.log("ok5");
+	
 
 		.then(() => {
 			console.log("ok6");
