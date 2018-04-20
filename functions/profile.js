@@ -1,12 +1,11 @@
 'use strict';
 
 const user = require('../models/user');
-const organization = require('../models/organization');
 
 exports.getProfile = privateKey =>
 
 	new Promise((resolve,reject) => {
-		user.find({ private_key: privateKey }
+		user.find({ private_key: privateKey })
 			.then(users => {
 				console.log("octobertest1");
 				console.log("PRIVATE KEY 3",privateKey);
