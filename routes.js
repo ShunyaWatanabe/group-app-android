@@ -156,6 +156,11 @@ module.exports = router => {
 
 			})
 
+			.reject(result=>{
+				console.log("Not Found him");
+				console.log(result);
+			})
+
 			.catch(err => res.status(err.status).json({ message: err.message }));
 
 	});
