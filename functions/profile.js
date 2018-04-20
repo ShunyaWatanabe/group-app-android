@@ -2,10 +2,11 @@
 
 const user = require('../models/user');
 
-exports.getProfile = privateKey =>
+exports.getProfile = privateKey =>{
 
+	console.log("octobertest1");
 	new Promise((resolve,reject) => {
-		console.log("octobertest1");
+		console.log("octobertest2");
 		user.find({ private_key: privateKey })
 			.then(users => {
 
@@ -22,3 +23,5 @@ exports.getProfile = privateKey =>
 		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }))
 
 	});
+
+}
