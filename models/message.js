@@ -17,6 +17,7 @@ const messageSchema = mongoose.Schema({
 	// timestamps: true
 	});
 
+
 mongoose.Promise = global.Promise;
-mongoose.createConnection(config.db);
-module.exports = mongoose.model('message', messageSchema);
+var connection = mongoose.createConnection(config.db);
+module.exports = connection.model('user', userSchema);

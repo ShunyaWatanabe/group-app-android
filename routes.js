@@ -9,7 +9,7 @@ const user = require(backPath + 'models/user');
 
 const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
-
+// const profile = require(backPath + 'functions/profile');
 
 //Push notifications
 let FCM = require('fcm-node');
@@ -27,7 +27,14 @@ module.exports = router => {
 	    var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
 	        registration_ids: ['eSobx6Kftco:APA91bG6X3w18PdYKaEs2GNeoJLEwyCUvkLErRZcmBUMZQpW37Kq7k8LImcnGR_Sj6QLLWU5mEQQBTrE9VvhBGrVFNAbjPiFYwaVRs0VBvgCftkNwRztessYxzg3VftWdlZK5DCqoLxK',
 	        'dCjUpAl8ItU:APA91bGjlOmHVqFKDTMoDupMUmnkdrshLx_OfEcbyzRbuB_KsMlNU57oUOlqzCNzKnKNOOSreSgMxfEYfKI4TYjSgj1jr29R0AywjARHKeaKQbMX_2WHFmVI2MjL65vlAhivH2_norOL'], //refistration_token
-	       
+	        //at most 1000 registration tokens
+	        //collapse_key
+
+	        // notification: {
+	        //     title: 'Title of your push notification',
+	        //     body: 'Body of your push notification'
+	        // },
+
 	        data: {  //you can send only notification or only data(or include both)
 	            title: 'Title of your push notification',
 	            text: 'Body of your push notification',
@@ -76,7 +83,7 @@ module.exports = router => {
 	router.post('/users/relogin', (req, res) => {
 
 		var ob = JSON.stringify(req.body);
-		
+
 		checkingTokens.checkTokens(req)
 
 			.then(result => {
@@ -94,20 +101,58 @@ module.exports = router => {
 
 	//add a new user
 	router.post('/users/signup', (req, res) => {
-		console.log("Name: " + req.body.name); 
+
+		console.log("Name: " + req.body.name); //+" private key "+req.body.private_key);
+
 		const name = req.body.name;
-		if (!name  || !name.trim() ) {
+		// const private_key = req.body.private_key;
+
+		if (!name  || !name.trim() ) {//|| !private_key || !private_key.trim()
+
 		console.log("error");
 			res.status(400).json({message: 'Invalid Request !'});
+
 		} else {
+
+		
 			register.registerUser(req)
+
 			.then(result => {
 				const token = jwt.sign(result, config.secret, { expiresIn: 20 });
+
+				
+
 				res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token})
 			})
+
 			.catch(err => {
 				res.status(err.status).json({ message: err.message })
+		
 		}
+	});
+
+
+	router.get('/users/search/:query', (req,res) => {
+
+			checkingTokens.checkTokens(req)
+
+			.then(result => {
+
+				search.users(req.params.query)
+
+				.then(result1 =>{
+
+					result1 = createResponse(result, result1);
+
+					res.status(result.status).json(result1);
+				})
+
+				.catch(err1 => res.status(err1.status).json({ message: err1.message }));
+
+			})
+
+			.catch(err => res.status(err.status).json({ message: err.message }));
+
 	});
 
 	//Creates new access token if needed
