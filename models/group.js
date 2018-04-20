@@ -13,8 +13,8 @@ const groupSchema = mongoose.Schema({
 
 	name: String,
 	members:[{type: Schema.Types.ObjectId, ref: 'user'}],
-	conversation: [{type: Schema.Types.ObjectId, ref: 'message'}]
-	created_at: String,
+	conversation: [{type: Schema.Types.ObjectId, ref: 'message'}],
+	created_at: String
 	});
 
 mongoose.Promise = global.Promise;
