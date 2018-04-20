@@ -6,10 +6,11 @@ const randomstring = require("randomstring");
 const config = require('../config/config.json');
 
 exports.registerUser = req =>
-
+	console.log("okb1");
 	new Promise((resolve,reject) => {
+		console.log("okb2");
 
-	  const salt = bcrypt.genSaltSync(10);
+	    const salt = bcrypt.genSaltSync(10);
 		const hash = bcrypt.hashSync(req.body.password, salt);
 		const refreshToken = randomstring.generate();
 		console.log("ok3");
