@@ -140,11 +140,11 @@ module.exports = router => {
 
 				.then(result1 =>{
 					console.log("Found him");
-					console.log(result1);
+					// console.log(result1);
 
-					result1 = createResponse(result, result1);
+					// result1 = createResponse(result, result1);
 
-					res.status(result.status).json(result1);
+					// res.status(result.status).json(result1);
 				})
 
 				.catch(err1 => res.status(err1.status).json({ message: err1.message }));
