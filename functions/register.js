@@ -34,7 +34,6 @@ exports.registerUser = req =>
 
 
 		.catch(err => {
-			console.log("ok7");
 			if (err.code == 11000) {
 
 				reject({ status: 409, message: 'User Already Registered !' });
