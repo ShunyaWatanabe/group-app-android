@@ -147,8 +147,8 @@ module.exports = router => {
 					// res.status(result.status).json(result1);
 				})
 
-				.catch(err1 => res.status(err1.status).json({ message: err1.message }));
-
+				//.catch(err1 => res.status(err1.status).json({ message: err1.message }));
+				.catch(err1 => console.log("octobertest3"));
 			})
 
 			.catch(err => res.status(err.status).json({ message: err.message }));
