@@ -105,7 +105,7 @@ module.exports = router => {
 		console.log("Name: " + req.body.name); //+" private key "+req.body.private_key);
 
 		const name = req.body.name;
-		//const private_key = req.body.private_key;
+		// const private_key = req.body.private_key;
 
 		if (!name  || !name.trim() ) {//|| !private_key || !private_key.trim()
 
@@ -120,7 +120,7 @@ module.exports = router => {
 			.then(result => {
 				const token = jwt.sign(result, config.secret, { expiresIn: 20 });
 
-				res.setHeader('Location', '/users/'+private_key);
+				res.setHeader('Location', '/users/'+name);
 				res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token})
 			})
 
