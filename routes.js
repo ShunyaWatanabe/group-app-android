@@ -9,7 +9,6 @@ const user = require(backPath + 'models/user');
 
 const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
-// const profile = require(backPath + 'functions/profile');
 
 //Push notifications
 let FCM = require('fcm-node');
