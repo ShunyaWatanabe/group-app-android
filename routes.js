@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const backPath = './';
 const config = require(backPath + 'config/config.json');
 const user = require(backPath + 'models/user');
+const checkingTokens = require(backPath + 'functions/checkTokens');
 
 const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
