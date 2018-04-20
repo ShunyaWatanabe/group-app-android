@@ -138,6 +138,8 @@ module.exports = router => {
 				profile.getProfile(req.params.private_key)
 
 				.then(result1 =>{
+					console.log("Found him");
+					console.log(result1);
 
 					result1 = createResponse(result, result1);
 
