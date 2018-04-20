@@ -102,12 +102,12 @@ module.exports = router => {
 	//add a new user
 	router.post('/users/signup', (req, res) => {
 
-		console.log("Name: " + req.body.name +" private key "+req.body.private_key);
+		console.log("Name: " + req.body.name); //+" private key "+req.body.private_key);
 
 		const name = req.body.name;
-		const private_key = req.body.private_key;
+		//const private_key = req.body.private_key;
 
-		if (!name || !private_key || !name.trim() || !private_key.trim()) {
+		if (!name  || !name.trim() ) {//|| !private_key || !private_key.trim()
 
 		console.log("error");
 			res.status(400).json({message: 'Invalid Request !'});
