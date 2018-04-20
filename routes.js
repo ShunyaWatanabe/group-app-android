@@ -10,7 +10,6 @@ const checkingTokens = require(backPath + 'functions/checkTokens');
 
 const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
-// const profile = require(backPath + 'functions/profile');
 
 //Push notifications
 let FCM = require('fcm-node');
