@@ -22,5 +22,5 @@ const userSchema = mongoose.Schema({
 });
 
 mongoose.Promise = global.Promise;
-mongoose.createConnection(config.db);
-module.exports = mongoose.model('user', userSchema);
+var connection = mongoose.createConnection(config.db);
+module.exports = connection.model('user', userSchema);
