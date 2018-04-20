@@ -25,9 +25,9 @@ exports.registerUser = req =>
 			if (err) console.log(err);
 		})
 
-
 		.then(() => {
 			console.log("ok6");
+			console.log("PRIVATE KEY:",privateKey);
 
 			resolve({ status: 201, message: 'User created!', refresh_token: refreshToken,  private_key: privateKey})
 
