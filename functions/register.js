@@ -7,9 +7,9 @@ const config = require('../config/config.json');
 
 exports.registerUser = req =>
 	new Promise((resolve,reject) => {
-	
+
 		const refreshToken = randomstring.generate();
-		
+
 		const newUser = new user({
 			name: req.body.name,
 
@@ -23,12 +23,12 @@ exports.registerUser = req =>
 		newUser.save(function(err){
 			if (err) console.log(err);
 		})
-	
+
 
 		.then(() => {
 			console.log("ok6");
 
-			resolve({ status: 201, message: 'User created!', refresh_token: refreshToken,  })
+			resolve({ status: 201, message: 'User created!', refresh_token: refreshToken,  private_key: private_key})
 
 		})
 
