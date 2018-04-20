@@ -19,4 +19,4 @@ const groupSchema = mongoose.Schema({
 
 mongoose.Promise = global.Promise;
 var connection = mongoose.createConnection(config.db);
-module.exports = connection.model('user', userSchema);
+module.exports = connection.model('group', groupSchema);
