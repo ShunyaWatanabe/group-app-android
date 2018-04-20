@@ -120,7 +120,7 @@ module.exports = router => {
 			.then(result => {
 				const token = jwt.sign(result, config.secret, { expiresIn: 20 });
 
-				res.setHeader('Location', '/users/'+name);
+				// res.setHeader('Location', '/users/'+name);
 				res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token})
 			})
 
