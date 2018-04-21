@@ -9,7 +9,7 @@ exports.createGroup = (user) =>
 
 		const newGroup = new group({
 			name: "RANDOM NAME"，
-			members:[user]，
+	//		members:[user]，
 	
 			created_at: new Date(),		
 
