@@ -213,9 +213,9 @@ module.exports = router => {
 	
 	});
 
-	//create or join group operation
-	router.post('users/newName', (req, res) => {
-		console.log('test0');
+
+
+	function changeUserName = (req) => {
 		new Promise((resolve,reject)=>{
 			console.log('test1');
 
@@ -228,8 +228,15 @@ module.exports = router => {
 				doc.save();
 					console.log('test5');
 
-			});			
-		})
+			});		
+		});
+	}
+
+	//changeUserName
+	router.post('users/newName', (req, res) => {
+		console.log('test0');
+	
+		changeUserName(req)
 		.then(result => {
 
 			res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token });
