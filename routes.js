@@ -7,7 +7,7 @@ const backPath = './';
 const config = require(backPath + 'config/config.json');
 const user = require(backPath + 'models/user');
 const checkingTokens = require(backPath + 'functions/checkTokens');
-const changeName = require(backPath + 'functions/userUpdateName')
+const changeName = require(backPath + 'functions/changeUserName')
 
 const profile = require(backPath + 'functions/profile');
 
