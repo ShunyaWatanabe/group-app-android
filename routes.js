@@ -222,7 +222,7 @@ module.exports = router => {
 		
 		changeName.changeUserName(req)
 		.then(result => {
-			//the result is the new name is string;
+			
 			res.status(result.status).json({ message: result.message });
 
 		})
