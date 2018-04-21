@@ -15,7 +15,7 @@ exports.changeUserName = (req) =>
 					
 				if (err) console.log(err);
 					
-				//doc[0].name = req.body[0];
+				doc[0].name = req.body[0];
 				console.log("ddd");
 				console.log(doc[0]);
 				console.log("eee");
