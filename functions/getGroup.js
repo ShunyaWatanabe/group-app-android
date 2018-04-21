@@ -10,6 +10,7 @@ exports.getGroup = (req) =>
 			console.log("test00");
 			if (err) console.log(err);
 			console.log(doc);
+			console.log(req.params.private_key);
 			var temp = doc.groups_participated;
 			resolve({status:201,message:"sucessfully get group" });
 
