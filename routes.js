@@ -14,7 +14,7 @@ const profile = require(backPath + 'functions/profile');
 const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
 const create = require(backPath + 'functions/create');
-const getGroupList = require(backPath + 'functions/getGroup');
+// const getGroupList = require(backPath + 'functions/getGroup');
 
 
 //Push notifications
