@@ -14,6 +14,8 @@ const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
 const create = require(backPath + 'functions/create');
 
+const user = require('./models/user');
+
 //Push notifications
 let FCM = require('fcm-node');
 let fcm = new FCM(config.serverKey);
@@ -210,5 +212,28 @@ module.exports = router => {
 			.catch(err => res.status(err.status).json({ message: err.message }));
 	
 	});
+
+	//create or join group operation
+	router.post('users/changeUserName', (req, res) => {
+
+		new Promise((resolve,reject)=>{
+
+			user.find({'private_key':req.body},function(err,doc){
+				if (err) console.log(err);
+				doc.name = req.path;
+				doc.save();
+
+			});			
+		})
+		.then(result => {
+
+			res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token });
+
+		})
+
+			.catch(err => res.status(err.status).json({ message: err.message }));
+	
+	});
+
 
 }
