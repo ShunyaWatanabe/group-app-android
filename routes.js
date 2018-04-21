@@ -222,14 +222,12 @@ module.exports = router => {
 		
 		changeName.changeUserName(req)
 		.then(result => {
-
+			console.log(result);
 			//res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token });
 
 		})
 
-			.catch(err => console.log("test11")//res.status(err.status).json({ message: err.message })
-
-				);
+			.catch(err => res.status(err.status).json({ message: err.message }));
 	
 	});
 
