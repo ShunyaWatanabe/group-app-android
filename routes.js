@@ -8,13 +8,13 @@ const config = require(backPath + 'config/config.json');
 const user = require(backPath + 'models/user');
 
 
-const checkingTokens = require('./functions/checkTokens');
-const changeName = require('./functions/changeUserName')
-const profile = require('./functions/profile');
+const checkingTokens = require(backPath+'functions/checkTokens');
+const changeName = require(backPath+'functions/changeUserName')
+const profile = require(backPath+'functions/profile');
 const register = require(backPath+'functions/register');
-const login = require('./functions/login');
-const create = require('./functions/create');
-const getGroup = require('./functions/getGroup');
+const login = require(backPath+'functions/login');
+const create = require(backPath+'functions/create');
+const getGroup = require(backPath+'functions/getGroup');
 
 
 
