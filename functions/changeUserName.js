@@ -8,7 +8,7 @@ const group = require('../models/group');
 
 exports.changeUserName = (req) =>
 	new Promise((resolve,reject) => {
-			user.findOne({'private_key':'WeK7QHF944gc'},function(err,doc){
+			user.findOne({'private_key':req.body[1]},function(err,doc){
 					
 				if (err) console.log(err);
 					
@@ -17,7 +17,7 @@ exports.changeUserName = (req) =>
 				console.log(doc);
 				console.log("eee");
 				doc.save(function(err){
-					if (err) console.log('9999');
+					if (err) console.log(err);
 				});
 				console.log('test5');
 
