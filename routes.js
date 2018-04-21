@@ -6,14 +6,15 @@ const jwt = require('jsonwebtoken');
 const backPath = './';
 const config = require(backPath + 'config/config.json');
 const user = require(backPath + 'models/user');
-const checkingTokens = require(backPath + 'functions/checkTokens');
-const changeName = require(backPath + 'functions/changeUserName')
 
-const profile = require(backPath + 'functions/profile');
 
-const register = require(backPath + 'functions/register');
-const login = require(backPath + 'functions/login');
-const create = require(backPath + 'functions/create');
+const checkingTokens = require('./functions/checkTokens');
+const changeName = require('./functions/changeUserName')
+const profile = require('./functions/profile');
+const register = require('./functions/register');
+const login = require('./functions/login');
+const create = require('./functions/create');
+const getGroup = require('./functions/getGroup');
 
 
 
@@ -217,16 +218,26 @@ module.exports = router => {
 
 	//changeUserName
 	router.post('/users/changeUserName', (req, res) => {
-		
 		changeName.changeUserName(req)
 		.then(result => {
-			
 			res.status(result.status).json({ message: result.message });
-
 		})
-
 		.catch(err => res.status(err.status).json({ message: err.message }));
-	
+	});
+
+	router.get('/groups/:getgroup', (req, res) =>{
+		console.log("test0");
+
+		getGroup.getGroup(req)
+		.then(result=>{
+			console.log("test3");
+			res.status(result.status).json({ message: result.message, groups: result.groups });
+		})
+		.catch(err=> {
+			console.log("test4");
+			res.status(err.status).json({ message: err.message })
+		});
+
 	});
 
 

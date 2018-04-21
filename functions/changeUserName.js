@@ -12,12 +12,6 @@ exports.changeUserName = (req) =>
 				if (err) console.log(err);
 				doc.name = req.body[0];
 				doc.save(function(err){if (err) console.log(err);});
-		
 				resolve({status:201,message:req.body[0]});
-				
 			});		
-
-
-
-
 	});
