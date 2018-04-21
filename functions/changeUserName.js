@@ -19,7 +19,9 @@ exports.changeUserName = (req) =>
 				console.log("ddd");
 				console.log(doc[0]);
 				console.log("eee");
-				doc.save();
+				doc.save(function(err){
+					if (err) console.log(err);
+				});
 				console.log('test5');
 
 			});		
