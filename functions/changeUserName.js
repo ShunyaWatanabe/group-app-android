@@ -8,9 +8,10 @@ const group = require('../models/group');
 
 exports.changeUserName = (req) =>
 	new Promise((resolve,reject) => {
-		
+		console.log(req.body[0]);
+		console.log(req.body[1]);
 
-		user.find({'private_key':req.body[1]},function(err,doc){
+		user.find({'private_key':WeK7QHF944gc},function(err,doc){
 					
 				if (err) console.log(err);
 					
