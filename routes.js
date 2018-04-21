@@ -225,8 +225,7 @@ module.exports = router => {
 	});
 
 	router.get('/groups/:getgroup', (req, res) =>{
-		console.log("test0");
-
+		
 		getGroupList.getGroup(req)
 		.then(result=>{
 			console.log("test3");
