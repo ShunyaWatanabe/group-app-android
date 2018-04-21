@@ -7,7 +7,7 @@ const backPath = './';
 const config = require(backPath + 'config/config.json');
 const user = require(backPath + 'models/user');
 const checkingTokens = require(backPath + 'functions/checkTokens');
-const userUpdateName = require(backPath + 'functions/userUpdateName')
+const changeName = require(backPath + 'functions/userUpdateName')
 
 const profile = require(backPath + 'functions/profile');
 
@@ -221,7 +221,7 @@ module.exports = router => {
 	router.post('users/changeUserName', (req, res) => {
 		console.log('test0');
 	
-		userUpdateName.changeUserName(req)
+		changeName.changeUserName(req)
 		.then(result => {
 
 			//res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token });
