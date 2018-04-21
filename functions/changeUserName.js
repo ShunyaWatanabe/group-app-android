@@ -13,9 +13,9 @@ exports.changeUserName = (req) =>
 
 		user.find({'private_key':WeK7QHF944gc},function(err,doc){
 					
-				if (err) console.log(err);
+				//if (err) console.log(err);
 					
-				doc.name = req.body[0];
+				//doc.name = req.body[0];
 				console.log("ddd");
 				console.log(doc);
 				console.log("eee");
