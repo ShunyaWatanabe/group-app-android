@@ -217,11 +217,16 @@ module.exports = router => {
 	router.post('users/:newName', (req, res) => {
 
 		new Promise((resolve,reject)=>{
+			console.log('test1');
 
 			user.find({'private_key':req.body},function(err,doc){
+					console.log('test2');
 				if (err) console.log(err);
+					console.log('test3');
 				doc.name = req.path;
+					console.log('test4');
 				doc.save();
+					console.log('test5');
 
 			});			
 		})
