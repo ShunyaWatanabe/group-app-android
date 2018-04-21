@@ -14,7 +14,7 @@ const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
 const create = require(backPath + 'functions/create');
 
-const user = require('./models/user');
+
 
 //Push notifications
 let FCM = require('fcm-node');
