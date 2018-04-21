@@ -11,8 +11,8 @@ exports.getGroup = (req) =>
 			if (err) console.log(err);
 			console.log(doc);
 			console.log(req.params.private_key);
-			var temp = doc.groups_participated;
-			resolve({status:201,message:"sucessfully get group" });
+			console.log(req.params);
+			resolve({status:201,message:"sucessfully get group",groups:doc.groups_participated });
 
 		});		
 	});
