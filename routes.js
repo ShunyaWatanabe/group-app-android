@@ -14,7 +14,7 @@ const profile = require(backPath + 'functions/profile');
 const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
 const create = require(backPath + 'functions/create');
-// const getGroup = require(backPath + 'functions/getGroup');
+const getGroupList = require(backPath + 'functions/getGroup');
 
 
 //Push notifications
@@ -227,7 +227,7 @@ module.exports = router => {
 	// router.get('/groups/:getgroup', (req, res) =>{
 	// 	console.log("test0");
 
-	// 	getGroup.getGroup(req)
+	// 	getGroupList.getGroup(req)
 	// 	.then(result=>{
 	// 		console.log("test3");
 	// 		res.status(result.status).json({ message: result.message, groups: result.groups });
