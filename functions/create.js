@@ -8,12 +8,12 @@ exports.createGroup = (user) =>
 	new Promise((resolve,reject) => {
 
 		const newGroup = new group({
-			name: "RANDOM NAME"
-			members:[user]
+			name: "RANDOM NAME"，
+			members:[user]，
 	
 			created_at: new Date(),		
 
-			isVerified: true,
+			isVerified: true
 
 
 
