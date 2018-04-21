@@ -219,8 +219,7 @@ module.exports = router => {
 
 	//changeUserName
 	router.post('/users/changeUserName', (req, res) => {
-		console.log('test0');
-	
+		
 		changeName.changeUserName(req)
 		.then(result => {
 
