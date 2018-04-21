@@ -8,7 +8,7 @@ exports.createGroup = (user) =>
 	new Promise((resolve,reject) => {
 
 		const newGroup = new group({
-			name: "RANDOM NAME"，
+			name: "RANDOM NAME",
 	//		members:[user]，
 	
 			created_at: new Date(),		
