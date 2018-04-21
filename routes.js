@@ -14,7 +14,7 @@ const profile = require(backPath + 'functions/profile');
 const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
 const create = require(backPath + 'functions/create');
-// const getGroupList = require(backPath + 'functions/getGroup');
+const getGroupList = require(backPath + 'functions/getGroup');
 
 
 //Push notifications
@@ -224,20 +224,20 @@ module.exports = router => {
 		.catch(err => res.status(err.status).json({ message: err.message }));
 	});
 
-	// router.get('/groups/:getgroup', (req, res) =>{
-	// 	console.log("test0");
+	router.get('/groups/:getgroup', (req, res) =>{
+		console.log("test0");
 
-	// 	getGroupList.getGroup(req)
-	// 	.then(result=>{
-	// 		console.log("test3");
-	// 		res.status(result.status).json({ message: result.message, groups: result.groups });
-	// 	})
-	// 	.catch(err=> {
-	// 		console.log("test4");
-	// 		res.status(err.status).json({ message: err.message })
-	// 	});
+		getGroupList.getGroup(req)
+		.then(result=>{
+			console.log("test3");
+			res.status(result.status).json({ message: result.message, groups: result.groups });
+		})
+		.catch(err=> {
+			console.log("test4");
+			res.status(err.status).json({ message: err.message })
+		});
 
-	// });
+	});
 
 
 }
