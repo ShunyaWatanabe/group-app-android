@@ -196,7 +196,7 @@ module.exports = router => {
 	}
 
 	//create or join group operation
-	router.post('groups/joingroup', (req, res) => {
+	router.post('/groups/joingroup', (req, res) => {
 
 		//check if code is invitation
 			//if yes, find group by invitation in the db and put the user inside
@@ -218,7 +218,7 @@ module.exports = router => {
 
 
 	//changeUserName
-	router.post('users/changeUserName', (req, res) => {
+	router.post('/users/changeUserName', (req, res) => {
 		console.log('test0');
 	
 		changeName.changeUserName(req)
