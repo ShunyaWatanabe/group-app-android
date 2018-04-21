@@ -228,11 +228,11 @@ module.exports = router => {
 		
 		getGroupList.getGroup(req)
 		.then(result=>{
-			console.log("test3");
+			console.log(result.groups);
 			res.status(result.status).json({ message: result.message, groups: result.groups });
 		})
 		.catch(err=> {
-			console.log("test4");
+		
 			res.status(err.status).json({ message: err.message })
 		});
 
