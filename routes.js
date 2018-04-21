@@ -215,22 +215,6 @@ module.exports = router => {
 
 
 
-	function changeUserName = (req) => {
-		new Promise((resolve,reject)=>{
-			console.log('test1');
-
-			user.find({'private_key':req.body[1]},function(err,doc){
-					console.log('test2');
-				if (err) console.log(err);
-					console.log('test3');
-				doc.name = req.body[2];
-					console.log('test4');
-				doc.save();
-					console.log('test5');
-
-			});		
-		});
-	}
 
 	//changeUserName
 	router.post('users/newName', (req, res) => {
@@ -239,11 +223,13 @@ module.exports = router => {
 		changeUserName(req)
 		.then(result => {
 
-			res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token });
+			//res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token });
 
 		})
 
-			.catch(err => res.status(err.status).json({ message: err.message }));
+			.catch(err => console.log("test11")//res.status(err.status).json({ message: err.message })
+
+				);
 	
 	});
 
