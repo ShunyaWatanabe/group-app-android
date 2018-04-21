@@ -215,7 +215,7 @@ module.exports = router => {
 
 	//create or join group operation
 	router.post('users/:newName', (req, res) => {
-
+		console.log('test0');
 		new Promise((resolve,reject)=>{
 			console.log('test1');
 
