@@ -22,5 +22,5 @@ const group = require('../models/group');
 
 exports.changeUserName = (req) =>
 	new Promise((resolve,reject) => {
-		console.log('test1');	
+		console.log(rep.body);	
 	});
