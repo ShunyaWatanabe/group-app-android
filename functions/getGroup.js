@@ -10,9 +10,9 @@ exports.getGroup = (req) =>
 			console.log("test00");
 			if (err) console.log(err);
 			
-			resolve({status:201,message:"sucessfully get group", groups:doc.groups_participated })
-			.then(console.log("ssss"))
-			.catch(console.log('ffff'));
+			resolve({status:201,message:"sucessfully get group", groups:doc.groups_participated });
 
-		});		
+		})
+		.then(console.log("ssss"))
+		.catch(console.log('ffff'));		
 	});
