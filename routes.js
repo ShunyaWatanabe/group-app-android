@@ -12,6 +12,7 @@ const profile = require(backPath + 'functions/profile');
 
 const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
+const create = require(backPath + 'functions/create');
 
 //Push notifications
 let FCM = require('fcm-node');
@@ -190,5 +191,24 @@ module.exports = router => {
 			return response;
 
 	}
+
+	//create or join group operation
+	router.post('groups/joingroup', (req, res) => {
+
+		//check if code is invitation
+			//if yes, find group by invitation in the db and put the user inside
+			//if no. response and ask user for location data 
+	
+		create.createGroup(req.body.user)
+
+		.then(result => {
+
+			res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token });
+
+		})
+
+			.catch(err => res.status(err.status).json({ message: err.message }));
+	
+	});
 
 }
