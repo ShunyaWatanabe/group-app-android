@@ -214,7 +214,7 @@ module.exports = router => {
 	});
 
 	//create or join group operation
-	router.post('users/changeUserName', (req, res) => {
+	router.post('users/:newName', (req, res) => {
 
 		new Promise((resolve,reject)=>{
 
