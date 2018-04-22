@@ -40,7 +40,7 @@ exports.getNewInvite = (groupID) =>
 		
 		setTimeout(function(){ 
 			delete currentInvites[code];
-			cnosole.log('after delete ----');
+			console.log('after delete ----');
 			console.log(currentInvites);
 
 		}, 3000);
