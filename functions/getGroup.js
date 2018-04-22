@@ -1,6 +1,7 @@
 'use strict';
 
 const user = require('../models/user');
+const group = require('../models/group');
 
 exports.getGroup = (req) =>
 	new Promise((resolve,reject) => {
