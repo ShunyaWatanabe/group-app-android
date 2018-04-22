@@ -112,22 +112,18 @@ module.exports = router => {
 
 	//add a new user
 	router.post('/users/signup', (req, res) => {
-
 		console.log("Name: " + req.body.name); 
 		const name = req.body.name;
 		
 		if (!name  || !name.trim()) {
 			console.log("error");
 			res.status(400).json({message: 'Invalid Request !'});
-		} 
-
-		
-		
+		} 		
 		else {
-			const matches = user.find({private_key:name});
-			if (matches.length != 0){
-				//matches[0] is our user who switches phone;
-			}else{
+			// const matches = user.find({private_key:name});
+			// if (matches.length != 0){
+			// 	//matches[0] is our user who switches phone;
+			// }else{
 				register.registerUser(req)
 				.then(result => {
 					const token = jwt.sign(result, config.secret, { expiresIn: 20 });
@@ -137,7 +133,7 @@ module.exports = router => {
 				.catch(err => {
 					res.status(err.status).json({ message: err.message});
 				});
-			}
+			// }
 		}
 	});
 
