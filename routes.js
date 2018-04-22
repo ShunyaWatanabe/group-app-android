@@ -14,9 +14,7 @@ const profile = require(backPath + 'functions/profile');
 const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
 const create = require(backPath + 'functions/create');
-const getGroupList = require(backPath + 'functions/getGroup');
-// const getInvitation = require(backPath + 'functions/getInvitationCode')
-
+// const getGroupList = require(backPath + 'functions/getGroup');
 
 //Push notifications
 let FCM = require('fcm-node');
@@ -229,28 +227,14 @@ module.exports = router => {
 	//download group on login
 	router.get('/groups/:getgroup', (req, res) =>{
 		console.log("tt uses get grouproute");
-		getGroupList.getGroup(req)
-		.then(result=>{
-			res.status(result.status).json({ message: result.message, groups: result.groups });
+		user.findOne({'private_key':req.params.getgroup},function(err,doc){
+			if (err) console.log(err);	
+			res.status(201).json({message: "Get group succeed!" ,groups: doc.groups_participated});	
 		})
 		.catch(err=> {
 			res.status(err.status).json({ message: err.message })
 		});
 	});
-
-	// //get invitation code
-	// router.get('/groups/invite/:getinvitationcode', (req, res) =>{
-	// 	console.log("if it uses get invitation route");
-	// 	getInvitation.getInvitationCode(req)
-	// 	.then(result=>{
-	// 		res.status(result.status).json({ message: result.message});
-	// 	})
-	// 	.catch(err=> {
-	// 		res.status(err.status).json({ message: err.message })
-	// 	});
-	// });
-
-
 
 
 	//get invitation code
@@ -259,6 +243,9 @@ module.exports = router => {
 
 		var tempCode = Math.floor((Math.random() * 10000)) -10;
 		if (tempCode<1000) tempCode+=1000;
+
+		//check whether code exist.
+		//add code to the library for 3 minutes
 
 		res.status(201).json({message: tempCode});
 
