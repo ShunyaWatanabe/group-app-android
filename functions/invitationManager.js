@@ -17,7 +17,7 @@ function addToPool(){
 	codePool.push(tempCode.toString());
 }
 
-exports.getNewInvite = (groupID) => {
+exports.getNewInvite = (groupID) => 
 	
 	new Promise((resolve,reject) => {
 		
@@ -39,4 +39,3 @@ exports.getNewInvite = (groupID) => {
 		
 	});
 	
-}
