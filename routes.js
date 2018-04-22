@@ -122,8 +122,10 @@ module.exports = router => {
 		else {
 			const matches = user.find({private_key:name});
 			// if (matches.length != 0){
-			// 	//matches[0] is our user who switches phone;
-			// }else{
+				//matches[0] is our user who switches phone;
+
+			if (false){
+			}else{
 				register.registerUser(req)
 				.then(result => {
 					const token = jwt.sign(result, config.secret, { expiresIn: 20 });
@@ -133,7 +135,7 @@ module.exports = router => {
 				.catch(err => {
 					res.status(err.status).json({ message: err.message});
 				});
-			// }
+			}
 		}
 	});
 
