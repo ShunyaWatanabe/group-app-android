@@ -25,12 +25,10 @@ exports.getNewInvite = (groupID) =>
 	
 	new Promise((resolve,reject) => {
 
-		console.log("new round --------------------");
-	
+		console.log("new round -----------");
 		console.log(currentInvites);
 
 		var code = codePool.pop();
-		
 		currentInvites[code] = groupID;
 
 		console.log("after opertaion-----");
@@ -42,9 +40,10 @@ exports.getNewInvite = (groupID) =>
 		
 		setTimeout(function(){ 
 			delete currentInvites.code;
+			cnosole.log('after delete ----');
 			console.log(currentInvites);
 
-		}, 1000);
+		}, 3000);
 
 		
 	});
