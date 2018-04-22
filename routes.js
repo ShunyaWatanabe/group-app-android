@@ -257,6 +257,8 @@ module.exports = router => {
 				console.log(!item.equals(req.body[1]));
 				return !item.equals(req.body[1]);
 			});
+
+			console.log(doc.groups_participated);
 			res.status(201).json({message: "remove succeed!" });	
 		})
 		.catch(err=> {
