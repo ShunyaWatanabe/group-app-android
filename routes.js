@@ -9,7 +9,7 @@ const user = require(backPath + 'models/user');
 
 
 const checkingTokens = require(backPath + 'functions/checkTokens');
-const changeName = require(backPath + 'functions/changeUserName')
+// const changeName = require(backPath + 'functions/changeUserName')
 const profile = require(backPath + 'functions/profile');
 const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
@@ -213,11 +213,17 @@ module.exports = router => {
 	});
 
 
+
+
 	//changeUserName
 	router.post('/users/changeUserName', (req, res) => {
-		changeName.changeUserName(req)
-		.then(result => {
-			res.status(result.status).json({ message: result.message });
+		console.log("router to changeUserName");
+
+		user.findOne({'private_key':req.body[1]},function(err,doc){
+			if (err) console.log(err);
+			doc.name = req.body[0];
+			doc.save(function(err){if (err) console.log(err);});
+			res.status(201).json({message:req.body[0]});
 		})
 		.catch(err => res.status(err.status).json({ message: err.message }));
 	});
@@ -225,12 +231,9 @@ module.exports = router => {
 
 	//download group on login
 	router.get('/groups/:getgroup', (req, res) =>{
-		console.log("tt uses get grouproute");
+		console.log("router to getgroup");
 		user.findOne({'private_key':req.params.getgroup},function(err,doc){
 			if (err) console.log(err);
-			console.log(doc);	
-			console.log(req.params);
-			console.log('checking');
 			res.status(201).json({message: "Get group succeed!" ,groups: doc.groups_participated});	
 		})
 		.catch(err=> {
@@ -241,8 +244,7 @@ module.exports = router => {
 
 	//get invitation code
 	router.get('/groups/invite/:getinvitationcode', (req, res) =>{
-		console.log("it uses get invitation route");
-
+		console.log("router to invitation");
 		var tempCode = Math.floor((Math.random() * 10000)) -10;
 		if (tempCode<1000) tempCode+=1000;
 
