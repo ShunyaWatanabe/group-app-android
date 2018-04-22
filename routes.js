@@ -123,7 +123,7 @@ module.exports = router => {
 			var flag = false;
 			user.find({private_key:name})
 			.then(users => {
-				if (user.length==0) {flag = true;console.log('hhhhh')};
+				if (user.length==0) {flag = true;console.log('hhhhh');}
 				else{
 					console.log('xxx');
 					//user[0] is our user who switches phone;
@@ -131,7 +131,6 @@ module.exports = router => {
 			});
 
 			if (flag){
-
 				register.registerUser(req)
 				.then(result => {
 					const token = jwt.sign(result, config.secret, { expiresIn: 20 });
