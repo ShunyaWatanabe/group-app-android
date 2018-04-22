@@ -122,9 +122,14 @@ module.exports = router => {
 		else {
 			const matches = user.find({private_key:name});
 			// if (matches.length != 0){
-				//matches[0] is our user who switches phone;
+			
+			console.log(matches);
+			console.log(matches.length);
 
 			if (false){
+
+				//matches[0] is our user who switches phone;
+
 			}else{
 				register.registerUser(req)
 				.then(result => {
