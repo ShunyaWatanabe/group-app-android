@@ -9,6 +9,7 @@ var codePool = [1111,2222,3333];
 // for (var i=0;i<50;i++){
 // 	addToPool();
 // }
+console.log('test11');
 
 // function addToPool(){
 // 	do{var tempCode = Math.floor((Math.random() * 10000)) -10;
@@ -28,6 +29,7 @@ exports.getNewInvite = (groupID) => {
 		currentInvites.code = groupID;
 		console.log('test4');
 		resolve(code);
+		console.log('test5');
 		// addToPool();
 		
 		// setTimeout(function(){ 
