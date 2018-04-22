@@ -1,92 +1,92 @@
-'use strict';
+// 'use strict';
 
-const user = require('../models/user');
+// const user = require('../models/user');
 
-exports.loginUser = (private_key, fcm_token) =>
+// exports.loginUser = (private_key, fcm_token) =>
 
-	new Promise((resolve,reject) => {
+// 	new Promise((resolve,reject) => {
 
-		user.find({ private_key: private_key }, {isVerified:1, fcm_token:1, refresh_token:1})
+// 		user.find({ private_key: private_key }, {isVerified:1, fcm_token:1, refresh_token:1})
 
-		.then(users => {
+// 		.then(users => {
 
-			if (users.length == 0) {
-				reject({ status: 404, message: 'User Not Found !' });
+// 			if (users.length == 0) {
+// 				reject({ status: 404, message: 'User Not Found !' });
 
-			} else {
+// 			} else {
 
-				return users[0];
+// 				return users[0];
 
-			}
-		})
+// 			}
+// 		})
 
-		.then(user => {
+// 		.then(user => {
 
-			if(user.isVerified == true){
+// 			if(user.isVerified == true){
 
-				if(fcm_token != null)
-					if (!fcm_token || !fcm_token.trim())
-						if(user.fcm_token.indexOf(fcm_token) < 0)
-							user.fcm_token.push(fcm_token);
+// 				if(fcm_token != null)
+// 					if (!fcm_token || !fcm_token.trim())
+// 						if(user.fcm_token.indexOf(fcm_token) < 0)
+// 							user.fcm_token.push(fcm_token);
 
-				user.save();
+// 				user.save();
 
-				resolve({ status: 200, message: name, refresh_token: user.refresh_token });
-			}
-			else{
-				reject({ status: 404, message: 'Account is not verified!' });
-			}
-		})
+// 				resolve({ status: 200, message: name, refresh_token: user.refresh_token });
+// 			}
+// 			else{
+// 				reject({ status: 404, message: 'Account is not verified!' });
+// 			}
+// 		})
 
-		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }));
+// 		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }));
 
-	});
+// 	});
 
-exports.reloginUser = private_key =>
+// exports.reloginUser = private_key =>
 
-	new Promise((resolve,reject) => {
+// 	new Promise((resolve,reject) => {
 
-		user.find({ private_key: private_key }, { refresh_token: 1})
+// 		user.find({ private_key: private_key }, { refresh_token: 1})
 
-		.then(users => resolve(users[0]))
+// 		.then(users => resolve(users[0]))
 
-		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }))
+// 		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }))
 
-	});
+// 	});
 
-exports.logout = (private_key, fcm_token) =>
+// exports.logout = (private_key, fcm_token) =>
 
-	new Promise((resolve,reject) => {
+// 	new Promise((resolve,reject) => {
 
-		user.find({ private_key: private_key }, { fcm_token: 1})
+// 		user.find({ private_key: private_key }, { fcm_token: 1})
 
-		.then(users => {
+// 		.then(users => {
 
-			if (users.length == 0) {
+// 			if (users.length == 0) {
 
-				reject({ status: 404, message: 'User Not Found !' });
+// 				reject({ status: 404, message: 'User Not Found !' });
 
-			} else {
+// 			} else {
 
-				return users[0];
+// 				return users[0];
 
-			}
-		})
+// 			}
+// 		})
 
-		.then(user => {
+// 		.then(user => {
 
-			if(fcm_token != null)
-				if (!fcm_token || !fcm_token.trim())
-					if(user.fcm_token.indexOf(fcm_token) >= 0)
-						user.fcm_token.splice(user.fcm_token.indexOf(fcm_token), 1);
+// 			if(fcm_token != null)
+// 				if (!fcm_token || !fcm_token.trim())
+// 					if(user.fcm_token.indexOf(fcm_token) >= 0)
+// 						user.fcm_token.splice(user.fcm_token.indexOf(fcm_token), 1);
 
-			return user.save();
+// 			return user.save();
 
-		})
+// 		})
 
-		.then(user => resolve({ status: 200, message: 'Logout !'}))
+// 		.then(user => resolve({ status: 200, message: 'Logout !'}))
 
-		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }))
+// 		.catch(err => reject({ status: 500, message: 'Internal Server Error !' }))
 
 
-	});
+// 	});
