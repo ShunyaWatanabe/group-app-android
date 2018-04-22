@@ -15,7 +15,7 @@ exports.createGroup = (user) =>
 
 			isVerified: true
 
-
+			console.log("ssssss");
 
 		});
 		
