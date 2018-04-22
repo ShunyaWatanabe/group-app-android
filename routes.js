@@ -121,6 +121,8 @@ module.exports = router => {
 			res.status(400).json({message: 'Invalid Request !'});
 		} 
 
+		//WE NEED TO LOG IN BY PRIVATE KEY HERE
+
 		// else if (user.find({private_key:name}).length!=0){
 		// 	//log in private key
 		// }
