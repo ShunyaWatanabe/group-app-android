@@ -6,7 +6,7 @@ const user = require('../models/user');
 var currentInvites = {};
 var codePool = ['1111','2222','3333','4444'];
 
-for (var i=0;i<50;i++){
+for (var i=0;i<80;i++){
 	addToPool();
 }
 
@@ -25,25 +25,14 @@ exports.getNewInvite = (groupID) =>
 	
 	new Promise((resolve,reject) => {
 
-	
-
 		var code = codePool.pop();
 		addToPool();
-		currentInvites[code] = groupID;
-
-		console.log("-----");
-		console.log(currentInvites);
-		
+		currentInvites[code] = groupID;		
 		resolve(code);
-		
-
 		
 		setTimeout(function(){ 
 			delete currentInvites[code];
-			console.log('after delete ----');
-			console.log(currentInvites);
-
-		}, 20000);
+		}, 300000);
 
 		
 	});

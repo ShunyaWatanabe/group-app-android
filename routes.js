@@ -232,9 +232,6 @@ module.exports = router => {
 	});
 
 
-	
-
-	//this might be ascynous 
 	//get invitation code
 	router.get('/groups/invite/:getinvitationcode', (req, res) =>{
 		console.log("router to invitation");
@@ -247,8 +244,6 @@ module.exports = router => {
 			res.status(err.status).json({ message: err.message })
 		})
 	});
-
-
 
 	//user leave group
 	router.post('/groups/leavegroup', (req, res) =>{
