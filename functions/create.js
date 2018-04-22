@@ -24,7 +24,7 @@ exports.createGroup = (user) =>
 		.then(() => {
 			console.log('test2');
 		
-			resolve({ status: 201, message: 'Group created!', refresh_token: refreshToken,  private_key: privateKey})
+			resolve({ status: 201, message: 'Group created!'})
 
 		})
 

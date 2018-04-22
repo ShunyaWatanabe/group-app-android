@@ -207,7 +207,7 @@ module.exports = router => {
 
 		.then(result => {
 
-			res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token });
+			res.status(result.status).json({ message: result.message});
 
 		})
 
