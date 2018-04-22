@@ -9,7 +9,7 @@ const user = require('./models/user');
 const checkingTokens = require('./functions/checkTokens');
 const profile = require('./functions/profile');
 const register = require('./functions/register');
-const login = require('./functions/login');
+// const login = require('./functions/login');
 const create = require('./functions/create');
 const invite = require('./functions/invitationManager');
 
@@ -19,6 +19,15 @@ let fcm = new FCM(config.serverKey);
 
 module.exports = router => {
 
+	//Creates new access token if needed
+	function createResponse(result, response){
+		if(result.status == 203){
+			response.token = jwt.sign(result, config.secret, { expiresIn: 20 });
+		}
+		return response;
+	}
+
+	
 	//for non path
 	router.get('/', (req, res) => res.end('Works!'));
 
@@ -156,36 +165,30 @@ module.exports = router => {
 	});
 
 
-	router.get('/users/search/:query', (req,res) => {
+	// router.get('/users/search/:query', (req,res) => {
 
-			checkingTokens.checkTokens(req)
+	// 		checkingTokens.checkTokens(req)
 
-			.then(result => {
+	// 		.then(result => {
 
-				search.users(req.params.query)
+	// 			search.users(req.params.query)
 
-				.then(result1 =>{
+	// 			.then(result1 =>{
 
-					result1 = createResponse(result, result1);
+	// 				result1 = createResponse(result, result1);
 
-					res.status(result.status).json(result1);
-				})
+	// 				res.status(result.status).json(result1);
+	// 			})
 
-				.catch(err1 => res.status(err1.status).json({ message: err1.message }));
+	// 			.catch(err1 => res.status(err1.status).json({ message: err1.message }));
 
-			})
+	// 		})
 
-			.catch(err => res.status(err.status).json({ message: err.message }));
+	// 		.catch(err => res.status(err.status).json({ message: err.message }));
 
-	});
+	// });
 
-	//Creates new access token if needed
-	function createResponse(result, response){
-		if(result.status == 203){
-			response.token = jwt.sign(result, config.secret, { expiresIn: 20 });
-		}
-		return response;
-	}
+
 
 
 

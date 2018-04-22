@@ -1,56 +1,56 @@
-'use strict';
+// 'use strict';
 
-const user = require('../models/user');
-const config = require('../config/config.json');
+// const user = require('../models/user');
+// const config = require('../config/config.json');
 
-exports.checkIfRegistered = req =>
+// exports.checkIfRegistered = req =>
 
-	new Promise((resolve,reject) => {
+// 	new Promise((resolve,reject) => {
 
-		const token = req.headers['x-access-token'];
+// 		const token = req.headers['x-access-token'];
 
-		const private_key = req.headers['private_key'];
+// 		const private_key = req.headers['private_key'];
 
-		if (token) {
+// 		if (token) {
 
-			try {
+// 			try {
 
-  				var decoded = jwt.verify(token, config.secret);
+//   				var decoded = jwt.verify(token, config.secret);
 
-  				if(decoded.message === private_key){
+//   				if(decoded.message === private_key){
 
-  					resolve({ status: 200, message: "Correct token"});
-  				}
-  				else{
+//   					resolve({ status: 200, message: "Correct token"});
+//   				}
+//   				else{
 
-  					user.find({ private_key: private_key }, {refresh_token:1})
+//   					user.find({ private_key: private_key }, {refresh_token:1})
 
-						.then(users => {
-						if (users.length == 0) {
+// 						.then(users => {
+// 						if (users.length == 0) {
 
-							reject({ status: 404, message: 'User Not Found !' });
+// 							reject({ status: 404, message: 'User Not Found !' });
 
-						} else {
+// 						} else {
 
-							if(users[0].refresh_token === refreshToken){
+// 							if(users[0].refresh_token === refreshToken){
 
-								resolve({ status: 203, message: users[0].name });
-							}
-							else{
-								reject({ status: 403, message: 'Wrong refresh token' });
-							}
+// 								resolve({ status: 203, message: users[0].name });
+// 							}
+// 							else{
+// 								reject({ status: 403, message: 'Wrong refresh token' });
+// 							}
 
-						}
-					})
+// 						}
+// 					})
 
-					.catch(err => reject({ status: 404, message: 'User Not Found !' }));
+// 					.catch(err => reject({ status: 404, message: 'User Not Found !' }));
 
-  				}
-			} catch(err) {
+//   				}
+// 			} catch(err) {
 
-		} else {
-			reject({ status: 405, message: 'Invalid Credentials !'});
+// 		} else {
+// 			reject({ status: 405, message: 'Invalid Credentials !'});
 
-		}
+// 		}
 
-	}});
+// 	}});
