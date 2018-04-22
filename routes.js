@@ -238,8 +238,8 @@ module.exports = router => {
 	//get invitation code
 	router.get('/groups/invite/:getinvitationcode', (req, res) =>{
 		console.log("router to invitation");
-		console.log(invite);
-		console.log(req.params.getinvitationcode);
+		console.log(invite.getNewInvite("1"));
+		
 		invite.getNewInvite(req.params.getinvitationcode)
 		.then(result =>{
 			res.status(201).json({message: result});
