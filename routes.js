@@ -120,7 +120,7 @@ module.exports = router => {
 			res.status(400).json({message: 'Invalid Request !'});
 		} 		
 		else {
-			// const matches = user.find({private_key:name});
+			const matches = user.find({private_key:name});
 			// if (matches.length != 0){
 			// 	//matches[0] is our user who switches phone;
 			// }else{
