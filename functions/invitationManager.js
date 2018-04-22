@@ -18,10 +18,15 @@ var codePool = [1111,2222,3333];
 // }
 
 exports.getNewInvite = (groupID) => {
+	console.log('test1');
 
 	new Promise((resolve,reject) => {
+		console.log('test2');
+
 		var code = codePool.pop();
+		console.log('test3');
 		currentInvites.code = groupID;
+		console.log('test4');
 		resolve(code);
 		// addToPool();
 		
