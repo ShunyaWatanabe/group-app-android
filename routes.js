@@ -232,9 +232,14 @@ module.exports = router => {
 	});
 
 
+	
+
+	//this might be ascynous 
 	//get invitation code
 	router.get('/groups/invite/:getinvitationcode', (req, res) =>{
 		console.log("router to invitation");
+		console.log(invite);
+		console.log(req.params.getinvitationcode);
 		invite.getNewInvite(req.params.getinvitationcode)
 		.then(result =>{
 			res.status(201).json({message: result});
