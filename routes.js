@@ -228,6 +228,7 @@ module.exports = router => {
 
 	//download group on login
 	router.get('/groups/:getgroup', (req, res) =>{
+		console.log("tt uses get grouproute");
 		getGroupList.getGroup(req)
 		.then(result=>{
 			res.status(result.status).json({ message: result.message, groups: result.groups });
@@ -239,6 +240,7 @@ module.exports = router => {
 
 	//get invitation code
 	router.get('/groups/:getinvitationcode', (req, res) =>{
+		console.log("if it uses get invitation route");
 		getInvitation.getInvitationCode(req)
 		.then(result=>{
 			res.status(result.status).json({ message: result.message});
