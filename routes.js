@@ -15,7 +15,7 @@ const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
 const create = require(backPath + 'functions/create');
 const getGroupList = require(backPath + 'functions/getGroup');
-const getInvitation = require(backPath + 'functions/getInvitationCode')
+// const getInvitation = require(backPath + 'functions/getInvitationCode')
 
 
 //Push notifications
@@ -238,17 +238,35 @@ module.exports = router => {
 		});
 	});
 
+	// //get invitation code
+	// router.get('/groups/invite/:getinvitationcode', (req, res) =>{
+	// 	console.log("if it uses get invitation route");
+	// 	getInvitation.getInvitationCode(req)
+	// 	.then(result=>{
+	// 		res.status(result.status).json({ message: result.message});
+	// 	})
+	// 	.catch(err=> {
+	// 		res.status(err.status).json({ message: err.message })
+	// 	});
+	// });
+
+
+
+
 	//get invitation code
 	router.get('/groups/invite/:getinvitationcode', (req, res) =>{
-		console.log("if it uses get invitation route");
-		getInvitation.getInvitationCode(req)
-		.then(result=>{
-			res.status(result.status).json({ message: result.message});
-		})
-		.catch(err=> {
-			res.status(err.status).json({ message: err.message })
-		});
+		console.log("it uses get invitation route");
+
+		var tempCode = Math.floor((Math.random() * 10000)) -10;
+		if (tempCode<1000) tempCode+=1000;
+
+		res.status(201).json({message: tempCode});
+
 	});
+
+
+
+	
 
 
 }
