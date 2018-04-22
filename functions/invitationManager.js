@@ -14,7 +14,7 @@ function addToPool(){
 	do{var tempCode = Math.floor((Math.random() * 10000)) -10;
 		if (tempCode<1000) tempCode+=1000;
 	}while((tempCode in currentInvites)||(codePool.includes(tempCode)));
-	codePool.push(tempCode);
+	codePool.push(tempCode.toString());
 }
 
 exports.getNewInvite = (groupID) => {
@@ -22,14 +22,15 @@ exports.getNewInvite = (groupID) => {
 	new Promise((resolve,reject) => {
 		
 		var code = codePool.pop();
-		console.log('test3');
+		console.log('test1');
 		currentInvites.code = groupID;
 		console.log(currentInvites);
 		console.log(code);
-		console.log("test222");
+		console.log("test2");
 		resolve(code);
-		console.log('test5');
-		// addToPool();
+		
+		addToPool();
+		console.log('test3');
 		
 		// setTimeout(function(){ 
 		// 	delete currentInvites.code;
