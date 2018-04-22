@@ -22,15 +22,15 @@ exports.createGroup = (user) =>
 		newGroup.save()
 
 		.then(() => {
-			console.log('test2');
 		
+			//shoudl retrun more here todo
 			resolve({ status: 201, message: 'Group created!'})
 
 		})
 
 
 		.catch(err => {
-			console.log('test4');
+		
 		
 			if (err.code == 11000) {
 
