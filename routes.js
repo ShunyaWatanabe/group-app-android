@@ -15,7 +15,7 @@ const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
 const create = require(backPath + 'functions/create');
 const getGroupList = require(backPath + 'functions/getGroup');
-const getInvitationCode = require(backPath + 'functions/getInvitationCode')
+const getInvitation = require(backPath + 'functions/getInvitationCode')
 
 
 //Push notifications
@@ -237,9 +237,9 @@ module.exports = router => {
 		});
 	});
 
-		//download group on login
+	//get invitation code
 	router.get('/groups/:getinvitationcode', (req, res) =>{
-		getInvitationCode.getInvitationCode(req)
+		getInvitation.getInvitationCode(req)
 		.then(result=>{
 			res.status(result.status).json({ message: result.message});
 		})

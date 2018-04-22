@@ -1,6 +1,6 @@
 'use strict';
 
-const group = require('../models/group');
+// const group = require('../models/group');
 
 exports.getInvitationCode = (req) =>
 	new Promise((resolve,reject) => {
