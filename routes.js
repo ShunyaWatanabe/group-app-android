@@ -250,7 +250,11 @@ module.exports = router => {
 		console.log("router to leavegroup");
 		user.findOne({'private_key':req.body[0]},function(err,doc){
 			if (err) console.log(err);
+			console.log(doc);
+			console.log(req.body[1]);
+
 			doc.groups_participated = doc.groups_participated.filter(function(item){
+				console.log(!item.equals(req.body[1]));
 				return !item.equals(req.body[1]);
 			});
 			res.status(201).json({message: "remove succeed!" });	
