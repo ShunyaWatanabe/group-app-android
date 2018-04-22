@@ -25,17 +25,17 @@ exports.getNewInvite = (groupID) =>
 	
 	new Promise((resolve,reject) => {
 
-		console.log("new round -----------");
-		console.log(currentInvites);
+	
 
 		var code = codePool.pop();
+		addToPool();
 		currentInvites[code] = groupID;
 
-		console.log("after opertaion-----");
+		console.log("-----");
 		console.log(currentInvites);
 		
 		resolve(code);
-		addToPool();
+		
 
 		
 		setTimeout(function(){ 
