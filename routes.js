@@ -16,6 +16,8 @@ const create = require('./functions/create');
 let FCM = require('fcm-node');
 let fcm = new FCM(config.serverKey);
 
+var invitations = {};
+
 module.exports = router => {
 
 	//for non path
@@ -234,11 +236,13 @@ module.exports = router => {
 	//get invitation code
 	router.get('/groups/invite/:getinvitationcode', (req, res) =>{
 		console.log("router to invitation");
-		var tempCode = Math.floor((Math.random() * 10000)) -10;
-		if (tempCode<1000) tempCode+=1000;
+		do{
+			var tempCode = Math.floor((Math.random() * 10000)) -10;
+			if (tempCode<1000) tempCode+=1000;
+		}while(!(tempcode in invitations))
 
-		//check whether code exist.
-		//add code to the library for 3 minutes
+		invitations.tempCode = req.params.getinvitationcode;
+		//delete this after three minutes
 
 		res.status(201).json({message: tempCode});
 
