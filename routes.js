@@ -3,15 +3,14 @@
 const auth = require('basic-auth');
 const jwt = require('jsonwebtoken');
 
-const backPath = './';
-const config = require(backPath + 'config/config.json');
-const user = require(backPath + 'models/user');
+const config = require('./config/config.json');
+const user = require('./models/user');
 
 const checkingTokens = require('./functions/checkTokens');
-const profile = require(backPath + 'functions/profile');
-const register = require(backPath + 'functions/register');
-const login = require(backPath + 'functions/login');
-const create = require(backPath + 'functions/create');
+const profile = require('./functions/profile');
+const register = require('./functions/register');
+const login = require('./functions/login');
+const create = require('./functions/create');
 
 //Push notifications
 let FCM = require('fcm-node');
