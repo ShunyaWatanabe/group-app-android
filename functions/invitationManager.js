@@ -25,11 +25,11 @@ exports.getNewInvite = (groupID) => {
 		resolve(code);
 		addToPool();
 		
-		setTimeout(function(){ 
-			delete currentInvites.code;
-		}, 180000);
+		// setTimeout(function(){ 
+		// 	delete currentInvites.code;
+		// }, 180000);
 
-		//remove the one after three minutes
+		
 	});
 	
 }
