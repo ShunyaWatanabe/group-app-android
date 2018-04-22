@@ -14,7 +14,6 @@ const profile = require(backPath + 'functions/profile');
 const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
 const create = require(backPath + 'functions/create');
-// const getGroupList = require(backPath + 'functions/getGroup');
 
 //Push notifications
 let FCM = require('fcm-node');
@@ -228,7 +227,10 @@ module.exports = router => {
 	router.get('/groups/:getgroup', (req, res) =>{
 		console.log("tt uses get grouproute");
 		user.findOne({'private_key':req.params.getgroup},function(err,doc){
-			if (err) console.log(err);	
+			if (err) console.log(err);
+			console.log(doc);	
+			console.log(req.params);
+			console.log('checking');
 			res.status(201).json({message: "Get group succeed!" ,groups: doc.groups_participated});	
 		})
 		.catch(err=> {
