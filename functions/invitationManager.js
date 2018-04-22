@@ -6,7 +6,7 @@ const user = require('../models/user');
 var currentInvites = {};
 var codePool = [];
 
-for (var i=0;i<50;i++){
+for (var i=0;i<5,i++){
 	addToPool();
 }
 
@@ -36,12 +36,12 @@ exports.getNewInvite = (groupID) =>
 		
 		resolve(code);
 
-		console.log("add one------");
+		
 		
 		addToPool();
-	
-		console.log(codePool);
 
+		console.log("add one------");
+		console.log(codePool);
 		console.log("finish----------");
 		
 		// setTimeout(function(){ 
