@@ -6,6 +6,7 @@ const group = require('../models/group');
 
 exports.createGroup = (user) =>
 	new Promise((resolve,reject) => {
+		console.log('test1');
 
 		const newGroup = new group({
 			name: "RANDOM NAME",
@@ -15,13 +16,13 @@ exports.createGroup = (user) =>
 
 			isVerified: true
 
-			console.log("ssssss");
 
 		});
-		
+		console.log('test2');
 		newGroup.save()
 
 		.then(() => {
+			console.log('test3');
 		
 			resolve({ status: 201, message: 'Group created!', refresh_token: refreshToken,  private_key: privateKey})
 
@@ -29,8 +30,10 @@ exports.createGroup = (user) =>
 
 
 		.catch(err => {
+			console.log('test4');
 		
 			if (err.code == 11000) {
+
 
 				reject({ status: 409, message: 'Group Already Registered !' });
 
