@@ -57,29 +57,29 @@ module.exports = router => {
 	});
 
 
-	//user login operation
-	router.post('/users/login', (req, res) => {
+	// //user login operation
+	// router.post('/users/login', (req, res) => {
 
-		const credentials = auth(req);
+	// 	const credentials = auth(req);
 
-		if (!credentials) {
+	// 	if (!credentials) {
 
-			res.status(400).json({ message: 'Invalid Request !' });
+	// 		res.status(400).json({ message: 'Invalid Request !' });
 
-		} else {
+	// 	} else {
 
-			login.loginUser(credentials.private_key, req.body.fcm_token)
+	// 		login.loginUser(credentials.private_key, req.body.fcm_token)
 
-			.then(result => {
+	// 		.then(result => {
 
-				const token = jwt.sign(result, config.secret, { expiresIn: 20 });
-				res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token });
+	// 			const token = jwt.sign(result, config.secret, { expiresIn: 20 });
+	// 			res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token });
 
-			})
+	// 		})
 
-			.catch(err => res.status(err.status).json({ message: err.message }));
-		}
-	});
+	// 		.catch(err => res.status(err.status).json({ message: err.message }));
+	// 	}
+	// });
 
 	//relogin
 	router.post('/users/relogin', (req, res) => {
