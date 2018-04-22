@@ -240,7 +240,7 @@ module.exports = router => {
 		do{
 			var tempCode = Math.floor((Math.random() * 10000)) -10;
 			if (tempCode<1000) tempCode+=1000;
-		}while(!(tempCode in invitations))
+		}while(tempCode in invitations)
 
 		invitations.tempCode = req.params.getinvitationcode;
 		//delete this after three minutes
