@@ -4,7 +4,7 @@ const group = require('../models/group');
 const user = require('../models/user');
 
 var currentInvites = {};
-var codePool = ['1111','2222','3333'];
+var codePool = ['1111','2222','3333','4444'];
 
 // for (var i=0;i<5;i++){
 // 	addToPool();
@@ -26,39 +26,25 @@ exports.getNewInvite = (groupID) =>
 	new Promise((resolve,reject) => {
 
 		console.log("new round --------------------");
-		console.log("status is: ");
-		console.log(codePool);
+	
 		console.log(currentInvites);
-
-		console.log('check');
-		check('1111');check('2222');check('3333');
-		console.log('checkfninish');
 
 		var code = codePool.pop();
 		
 		currentInvites[code] = groupID;
 
-	
-		
 		console.log("after opertaion-----");
 		console.log(currentInvites);
-		console.log(codePool);
-
-		console.log('check');
-		check('1111');check('2222');check('3333');
-		console.log('checkfninish');
 		
 		resolve(code);
-		
 		addToPool();
 
-		console.log("add one------");
-		console.log(codePool);
-		console.log("finish----------");
 		
-		// setTimeout(function(){ 
-		// 	delete currentInvites.code;
-		// }, 180000);
+		setTimeout(function(){ 
+			delete currentInvites.code;
+			console.log(currentInvites);
+
+		}, 1000);
 
 		
 	});
