@@ -28,6 +28,8 @@ exports.getNewInvite = (groupID) => {
 		console.log('test3');
 		currentInvites.code = groupID;
 		console.log('test4');
+		console.log(code);
+		console.log("test222");
 		resolve(code);
 		console.log('test5');
 		// addToPool();
