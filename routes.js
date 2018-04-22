@@ -257,7 +257,7 @@ module.exports = router => {
 			});
 
 			doc.save(function(err){if (err) console.log(err);});
-			res.status(201).json({message: "remove succeed!" });	
+			res.status(201).json({message: "remove succeed!" ,id: req.body[1]});	
 		})
 		.catch(err=> {
 			res.status(err.status).json({ message: err.message })
