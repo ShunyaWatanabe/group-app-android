@@ -225,6 +225,7 @@ module.exports = router => {
 		.catch(err => res.status(err.status).json({ message: err.message }));
 	});
 
+
 	//download group on login
 	router.get('/groups/:getgroup', (req, res) =>{
 		getGroupList.getGroup(req)
