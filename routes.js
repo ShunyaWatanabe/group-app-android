@@ -9,7 +9,6 @@ const user = require(backPath + 'models/user');
 
 
 const checkingTokens = require(backPath + 'functions/checkTokens');
-// const changeName = require(backPath + 'functions/changeUserName')
 const profile = require(backPath + 'functions/profile');
 const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
@@ -183,15 +182,22 @@ module.exports = router => {
 
 	//Creates new access token if needed
 	function createResponse(result, response){
-
 		if(result.status == 203){
 			response.token = jwt.sign(result, config.secret, { expiresIn: 20 });
-			return response;
 		}
-		else
-			return response;
+		return response;
 
 	}
+
+
+
+
+
+
+
+
+
+
 
 	//create or join group operation
 	router.post('/groups/joingroup', (req, res) => {
@@ -201,21 +207,15 @@ module.exports = router => {
 			//if no. response and ask user for location data 
 	
 		create.createGroup(req.body.user)
-
 		.then(result => {
-
 			res.status(result.status).json({ message: result.message});
-
 		})
-
-			.catch(err => res.status(err.status).json({ message: err.message }));
+		.catch(err => res.status(err.status).json({ message: err.message }));
 	
 	});
 
 
-
-
-	//changeUserName
+	//change Username
 	router.post('/users/changeUserName', (req, res) => {
 		console.log("router to changeUserName");
 
@@ -229,7 +229,7 @@ module.exports = router => {
 	});
 
 
-	//download group on login
+	//download group upon login
 	router.get('/groups/:getgroup', (req, res) =>{
 		console.log("router to getgroup");
 		user.findOne({'private_key':req.params.getgroup},function(err,doc){
