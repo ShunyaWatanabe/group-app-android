@@ -12,7 +12,7 @@ exports.getInvitationCode = (req) =>
 
 		//two bugs, first it is very slow
 
-
+		//on the client side alos has to change
 		//change the format of group_id:	req.params.getinvitationcode
 		
 		//put them into a memory session dictinoary
