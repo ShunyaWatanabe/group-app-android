@@ -15,7 +15,7 @@ const register = require(backPath + 'functions/register');
 const login = require(backPath + 'functions/login');
 const create = require(backPath + 'functions/create');
 const getGroupList = require(backPath + 'functions/getGroup');
-const getInvitationCode = require(backPath + 'functions/getInvitationCode');
+const getInvitationCode = require(backPath + 'functions/getInvitationCode')
 
 
 //Push notifications
