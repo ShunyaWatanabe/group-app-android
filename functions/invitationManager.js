@@ -6,9 +6,9 @@ const user = require('../models/user');
 var currentInvites = {};
 var codePool = ['1111','2222','3333','4444'];
 
-// for (var i=0;i<5;i++){
-// 	addToPool();
-// }
+for (var i=0;i<50;i++){
+	addToPool();
+}
 
 function addToPool(){
 	do{var tempCode = Math.floor((Math.random() * 10000)) -10;
@@ -43,7 +43,7 @@ exports.getNewInvite = (groupID) =>
 			console.log('after delete ----');
 			console.log(currentInvites);
 
-		}, 3000);
+		}, 20000);
 
 		
 	});
