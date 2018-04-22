@@ -236,11 +236,11 @@ module.exports = router => {
 	//get invitation code
 	router.get('/groups/invite/:getinvitationcode', (req, res) =>{
 		console.log("router to invitation");
-		var tempCode;
+		
 		do{
-			tempCode = Math.floor((Math.random() * 10000)) -10;
+			var tempCode = Math.floor((Math.random() * 10000)) -10;
 			if (tempCode<1000) tempCode+=1000;
-		}while(!(tempcode in invitations))
+		}while(!(tempCode in invitations))
 
 		invitations.tempCode = req.params.getinvitationcode;
 		//delete this after three minutes
