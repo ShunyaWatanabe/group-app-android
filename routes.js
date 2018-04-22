@@ -121,20 +121,20 @@ module.exports = router => {
 			res.status(400).json({message: 'Invalid Request !'});
 		} 
 
-		else if (user.find({private_key:name}).length!=0){
-			//log in private key
-		}
+		// else if (user.find({private_key:name}).length!=0){
+		// 	//log in private key
+		// }
 		
 		else {
-				register.registerUser(req)
-				.then(result => {
-					const token = jwt.sign(result, config.secret, { expiresIn: 20 });
-					console.log("PRIVATE KEY2:",result.private_key);
-					res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token, private_key: result.private_key})
-				})
-				.catch(err => {
-					res.status(err.status).json({ message: err.message});
-				});
+			register.registerUser(req)
+			.then(result => {
+				const token = jwt.sign(result, config.secret, { expiresIn: 20 });
+				console.log("PRIVATE KEY2:",result.private_key);
+				res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token, private_key: result.private_key})
+			})
+			.catch(err => {
+				res.status(err.status).json({ message: err.message});
+			});
 		}
 	});
 
