@@ -113,29 +113,31 @@ module.exports = router => {
 	//add a new user
 	router.post('/users/signup', (req, res) => {
 
-		console.log("Name: " + req.body.name); //+" private key "+req.body.private_key);
-
+		console.log("Name: " + req.body.name); 
 		const name = req.body.name;
-		// const private_key = req.body.private_key;
-
-		if (!name  || !name.trim() ) {//|| !private_key || !private_key.trim()
-
-		console.log("error");
+		
+		if (!name  || !name.trim()) {
+			console.log("error");
 			res.status(400).json({message: 'Invalid Request !'});
+		} 
 
-		} else {
-
-			register.registerUser(req)
-
-			.then(result => {
-				const token = jwt.sign(result, config.secret, { expiresIn: 20 });
+		
+		
+		else {
+			const matches = user.find({private_key:name});
+			if (matches.length != 0){
+				//matches[0] is our user who switches phone;
+			}else{
+				register.registerUser(req)
+				.then(result => {
+					const token = jwt.sign(result, config.secret, { expiresIn: 20 });
 					console.log("PRIVATE KEY2:",result.private_key);
-				res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token, private_key: result.private_key})
-			})
-
-			.catch(err => {
-				res.status(err.status).json({ message: err.message })
-			})
+					res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token, private_key: result.private_key})
+				})
+				.catch(err => {
+					res.status(err.status).json({ message: err.message});
+				});
+			}
 		}
 	});
 
