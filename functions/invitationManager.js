@@ -6,7 +6,7 @@ const user = require('../models/user');
 var currentInvites = {};
 var codePool = [];
 
-for (var i=0;i<5,i++){
+for (var i=0;i<5;i++){
 	addToPool();
 }
 
