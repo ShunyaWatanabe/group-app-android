@@ -11,6 +11,7 @@ const profile = require('./functions/profile');
 const register = require('./functions/register');
 const login = require('./functions/login');
 const create = require('./functions/create');
+const invite = require('./functions/invitationManager');
 
 //Push notifications
 let FCM = require('fcm-node');
@@ -234,13 +235,13 @@ module.exports = router => {
 	//get invitation code
 	router.get('/groups/invite/:getinvitationcode', (req, res) =>{
 		console.log("router to invitation");
-		
-		res.status(201).json({message: 1111});
-		
-		var tempCode = Math.floor((Math.random() * 10000)) -10;
-		if (tempCode<1000) tempCode+=1000;
-	
-		//use a manager to manage invitation sequence
+		invite.getNewInvite(req.params.getinvitationcode)
+		.catch(result =>{
+			res.status(201).json({message: result});
+		})
+		.catch(err =>{
+			res.status(err.status).json({ message: err.message })
+		})
 	});
 
 
@@ -250,12 +251,9 @@ module.exports = router => {
 		console.log("router to leavegroup");
 		user.findOne({'private_key':req.body[0]},function(err,doc){
 			if (err) console.log(err);
-			
 			doc.groups_participated = doc.groups_participated.filter(function(item){
-				
 				return !item.equals(req.body[1]);
 			});
-
 			doc.save(function(err){if (err) console.log(err);});
 			res.status(201).json({message: "remove succeed!" ,id: req.body[1]});	
 		})
