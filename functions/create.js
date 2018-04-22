@@ -6,10 +6,10 @@ const group = require('../models/group');
 
 exports.createGroup = (user) =>
 	new Promise((resolve,reject) => {
-		console.log('test1');
+		
 
 		const newGroup = new group({
-			name: "RANDOM NAME",
+			name: "Test1",
 	//		members:[user]，
 	
 			created_at: new Date(),		
@@ -18,11 +18,11 @@ exports.createGroup = (user) =>
 
 
 		});
-		console.log('test2');
+		
 		newGroup.save()
 
 		.then(() => {
-			console.log('test3');
+			console.log('test2');
 		
 			resolve({ status: 201, message: 'Group created!', refresh_token: refreshToken,  private_key: privateKey})
 
