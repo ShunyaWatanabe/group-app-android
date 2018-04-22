@@ -21,9 +21,12 @@ exports.getNewInvite = (groupID) =>
 	
 	new Promise((resolve,reject) => {
 		
+
+
+
 		var code = codePool.pop();
 		console.log('test1');
-		currentInvites.code = groupID;
+		currentInvites[code] = groupID;
 		console.log(currentInvites);
 		console.log(code);
 		console.log("test2");

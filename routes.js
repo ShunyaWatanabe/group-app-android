@@ -238,7 +238,6 @@ module.exports = router => {
 	//get invitation code
 	router.get('/groups/invite/:getinvitationcode', (req, res) =>{
 		console.log("router to invitation");
-		console.log(invite.getNewInvite("1"));
 		
 		invite.getNewInvite(req.params.getinvitationcode)
 		.then(result =>{
