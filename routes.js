@@ -241,9 +241,23 @@ module.exports = router => {
 		if (tempCode<1000) tempCode+=1000;
 	
 		//use a manager to manage invitation sequence
+	});
 
-		
 
+
+	//user leave group
+	router.post('/groups/leavegroup', (req, res) =>{
+		console.log("router to leavegroup");
+		user.findOne({'private_key':req.body[0]},function(err,doc){
+			if (err) console.log(err);
+			doc.groups_participated = doc.groups_participated.filter(function(item){
+				return !item.equals(req.body[1]);
+			});
+			res.status(201).json({message: "remove succeed!" });	
+		})
+		.catch(err=> {
+			res.status(err.status).json({ message: err.message })
+		});
 	});
 
 
