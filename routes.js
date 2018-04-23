@@ -224,6 +224,11 @@ module.exports = router => {
 	});
 
 
+
+
+
+
+
 	//download group upon login
 	router.get('/groups/:getgroup', (req, res) =>{
 		console.log("router to getgroup");
@@ -244,15 +249,45 @@ module.exports = router => {
 				});
 			});
 		})
+		.then(()=>{
+			console.log("groupslist");
+			console.log(groupslist);
+			res.status(201).json({message: "Get group succeed!",groups: groupslist});
+
+		})
 		.catch(err=> {
 			res.status(err.status).json({ message: err.message })
 		});
 
 
-		console.log("groupslist");
-		console.log(groupslist);
-		res.status(201).json({message: "Get group succeed!",groups: groupslist});	
+			
 	});
+
+
+
+  // var query = Band.findOne({name: "Guns N' Roses"});
+
+  //   query.select('name occupation');
+
+  //   query.then(function (doc) {
+  //     // use doc
+  //   });
+
+
+  //   query.exec().then(function (doc) {
+  //     // use doc
+  //   });
+  
+
+
+
+
+
+
+
+
+
+
 
 
 	//get invitation code
