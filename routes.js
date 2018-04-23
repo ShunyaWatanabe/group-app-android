@@ -266,9 +266,10 @@ module.exports = router => {
 						if (err) console.log(err);
 						groupslist.push(groupObject);
 						console.log("push one");
-					});
+					})
+					.then(()=>callback(null));
 
-					 callback(null);
+					 // callback(null);
 					// groupID.someAsyncCall(function(){callback();});
 				},
 
