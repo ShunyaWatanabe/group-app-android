@@ -271,7 +271,7 @@ module.exports = router => {
 		});
 
 
-
+	}
 
 
 	//get invitation code
