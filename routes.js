@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const config = require('./config/config.json');
 const user = require('./models/user');
+const group = require('/models/group');
 
 const checkingTokens = require('./functions/checkTokens');
 const profile = require('./functions/profile');
@@ -228,7 +229,24 @@ module.exports = router => {
 		console.log("router to getgroup");
 		user.findOne({'private_key':req.params.getgroup},function(err,doc){
 			if (err) console.log(err);
-			res.status(201).json({message: "Get group succeed!" ,groups: doc.groups_participated});	
+
+			var groupslist = [];
+
+
+			doc.groups_participated.forEach(function(groupID){
+			
+
+				group.findById(groupID, "_id name",function(err,groupObject){
+					if (err) console.log(err);
+					groupslist.add(groupObject);
+				});
+
+			});
+
+			res.status(201).json({message: "Get group succeed!",groups:groupslist});	
+
+
+
 		})
 		.catch(err=> {
 			res.status(err.status).json({ message: err.message })
