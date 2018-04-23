@@ -244,7 +244,7 @@ module.exports = router => {
 						groupslist.push(groupObject);
 						console.log("push one");
 					})
-					.then(()=>callback(null));
+					.then(()=>callback("mm"));
 				},
 
 				function(err){ 
