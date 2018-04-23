@@ -268,7 +268,7 @@ module.exports = router => {
 						console.log("push one");
 					});
 
-					 return callback(null);
+					 callback(null);
 					// groupID.someAsyncCall(function(){callback();});
 				},
 
@@ -279,7 +279,7 @@ module.exports = router => {
 					res.status(201).json({message: "Get group succeed!",groups: groupslist});
 				}
 			);
-			console.log("aterall");
+			// console.log("aterall");
 
 
 
