@@ -248,14 +248,18 @@ module.exports = router => {
 					if (err) console.log(err);
 					groupslist.push(groupObject);
 
-					console.log("groupslist");
-					console.log(groupslist);
 			
 				});
 
 			});
 
-			res.status(201).json({message: "Get group succeed!",groups:groupslist});	
+
+			console.log("groupslist");
+			console.log(groupslist);
+			console.log(typeOf groupslist);
+			console.log(typeOf groupslist[0]);
+
+			res.status(201).json({message: "Get group succeed!",groups: groupslist});	
 
 
 
