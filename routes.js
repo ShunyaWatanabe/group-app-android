@@ -235,7 +235,7 @@ module.exports = router => {
 			var groupslist = [];
 
 			console.log("doc");
-			console.log(doc);
+			console.log(typeof doc);
 			doc.groups_participated.forEach(function(groupID){
 
 				console.log("groupID");
