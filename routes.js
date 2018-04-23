@@ -277,7 +277,9 @@ module.exports = router => {
 					console.log("groupslist");
 					console.log(groupslist);
 					res.status(201).json({message: "Get group succeed!",groups: groupslist});
-				});
+				}
+			);
+			console.log("aterall");
 
 
 
