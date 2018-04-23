@@ -230,46 +230,28 @@ module.exports = router => {
 
 		var groupslist = [];
 
-		new Promise((resolve,reject)=>{
 
+		user.findOne({'private_key':req.params.getgroup},function(err,doc){
+			if (err) console.log(err);
 
+			doc.groups_participated.forEach(function(groupID){
+				group.findById(groupID, "_id name",function(err,groupObject){
+					if (err) console.log(err);
+					groupslist.push(groupObject);
 
-			user.findOne({'private_key':req.params.getgroup},function(err,doc){
-
-				if (err) console.log(err);
-
-				console.log("doc");
-				console.log(typeof doc);
-				doc.groups_participated.forEach(function(groupID){
-
-					console.log("groupID");
-					console.log(groupID);
-					group.findById(groupID, "_id name",function(err,groupObject){
-						console.log("groupObject");
-						console.log(groupObject);
-						if (err) console.log(err);
-						groupslist.push(groupObject);
-						
-						console.log(typeof groupslist);
-						console.log(typeof groupslist[0]);
-					});
+					console.log(typeof groupslist);
+					console.log(typeof groupslist[0]);
 				});
 			});
-
-			
-
-			console.log("groupslist");
-			console.log(groupslist);
-			resolve(groupslist);
 		})
-		.then(result => {
-			console.log('result');
-			console.log(result);
-			res.status(201).json({message: "Get group succeed!",groups: result});	
-		})
-		.catch(err=>{
-			res.status(err.status).json({ message: err.message });
+		.catch(err=> {
+			res.status(err.status).json({ message: err.message })
 		});
+
+
+		console.log("groupslist");
+		console.log(groupslist);
+		res.status(201).json({message: "Get group succeed!",groups: groupslist});	
 	});
 
 
