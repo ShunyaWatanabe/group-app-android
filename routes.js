@@ -228,51 +228,49 @@ module.exports = router => {
 	router.get('/groups/:getgroup', (req, res) =>{
 		console.log("router to getgroup");
 
-
-		user.findOne({'private_key':req.params.getgroup},function(err,doc){
-			if (err) console.log(err);
-
-			var groupslist = [];
-
-			console.log("doc");
-			console.log(typeof doc);
-			doc.groups_participated.forEach(function(groupID){
-
-				console.log("groupID");
-				console.log(groupID);
-			
-
-				group.findById(groupID, "_id name",function(err,groupObject){
-
-					console.log("groupObject");
-					console.log(groupObject);
-			
-					if (err) console.log(err);
-					groupslist.push(groupObject);
-
-					console.log("groupslist");
-					console.log(groupslist);
-					console.log(typeof groupslist);
-					console.log(typeof groupslist[0]);
+		var groupslist = [];
 
 
-			
+		new Promise((resolve,reject)=>{
+
+
+
+			user.findOne({'private_key':req.params.getgroup},function(err,doc){
+
+				if (err) console.log(err);
+
+				console.log("doc");
+				console.log(typeof doc);
+				doc.groups_participated.forEach(function(groupID){
+
+					console.log("groupID");
+					console.log(groupID);
+					group.findById(groupID, "_id name",function(err,groupObject){
+						console.log("groupObject");
+						console.log(groupObject);
+						if (err) console.log(err);
+						groupslist.push(groupObject);
+						console.log("groupslist");
+						console.log(groupslist);
+						console.log(typeof groupslist);
+						console.log(typeof groupslist[0]);
+					});
 				});
-
+				
 			});
-
-
-		
-
-			res.status(201).json({message: "Get group succeed!",groups: groupslist});	
-
-
+			
 
 		})
-		.catch(err=> {
-			res.status(err.status).json({ message: err.message })
+		.then(resolve => {
+			res.status(201).json({message: "Get group succeed!",groups: groupslist});	
+		})
+		.catch(err=>{
+			res.status(err.status).json({ message: err.message });
+
 		});
-	});
+
+
+
 
 
 	//get invitation code
