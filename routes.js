@@ -232,13 +232,25 @@ module.exports = router => {
 
 			var groupslist = [];
 
-
+			console.log("doc");
+			console.log(doc);
 			doc.groups_participated.forEach(function(groupID){
+
+				console.log("groupID");
+				console.log(groupID);
 			
 
 				group.findById(groupID, "_id name",function(err,groupObject){
+
+					console.log("groupObject");
+					console.log(groupObject);
+			
 					if (err) console.log(err);
 					groupslist.add(groupObject);
+
+					console.log("groupslist");
+					console.log(groupslist);
+			
 				});
 
 			});
