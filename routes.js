@@ -250,6 +250,7 @@ module.exports = router => {
 				function(err){ 
 					console.log("groupslist");
 					console.log(groupslist);
+					groupslist = groupslist.filter(function(n){return n!=null});
 					res.status(201).json({message: "Get group succeed!",groups: groupslist});
 				}
 			);
