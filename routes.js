@@ -265,6 +265,7 @@ module.exports = router => {
 					group.findById(groupID, "_id name",function(err,groupObject){
 						if (err) console.log(err);
 						groupslist.push(groupObject);
+						console.log("push one");
 					});
 
 					return callback(null);
