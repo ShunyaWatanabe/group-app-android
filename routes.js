@@ -256,8 +256,8 @@ module.exports = router => {
 
 			console.log("groupslist");
 			console.log(groupslist);
-			console.log(typeOf groupslist);
-			console.log(typeOf groupslist[0]);
+			console.log(typeof groupslist);
+			console.log(typeof groupslist[0]);
 
 			res.status(201).json({message: "Get group succeed!",groups: groupslist});	
 
