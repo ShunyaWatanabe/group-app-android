@@ -265,7 +265,7 @@ module.exports = router => {
 		.catch(err=>{
 			res.status(err.status).json({ message: err.message });
 		});
-	}
+	});
 
 
 	//get invitation code
