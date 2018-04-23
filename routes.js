@@ -259,10 +259,11 @@ module.exports = router => {
 				
 			});
 			
+			resolve(groupslist);
 
 		})
-		.then(resolve => {
-			res.status(201).json({message: "Get group succeed!",groups: groupslist});	
+		.then(result => {
+			res.status(201).json({message: "Get group succeed!",groups: result});	
 		})
 		.catch(err=>{
 			res.status(err.status).json({ message: err.message });
