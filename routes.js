@@ -263,6 +263,8 @@ module.exports = router => {
 			resolve(groupslist);
 		})
 		.then(result => {
+			console.log('result');
+			console.log(result);
 			res.status(201).json({message: "Get group succeed!",groups: result});	
 		})
 		.catch(err=>{
