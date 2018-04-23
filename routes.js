@@ -225,7 +225,7 @@ module.exports = router => {
 
 
 	//download group upon login
-	router.get('/groups/:getgroup', (req, res) => {
+	router.get('/groups/:getgroup', (req, res) =>{
 		console.log("router to getgroup");
 
 		var groupslist = [];
@@ -249,14 +249,17 @@ module.exports = router => {
 						console.log(groupObject);
 						if (err) console.log(err);
 						groupslist.push(groupObject);
-						console.log("groupslist");
-						console.log(groupslist);
+						
 						console.log(typeof groupslist);
 						console.log(typeof groupslist[0]);
 					});
 				});
 			});
+
 			
+
+			console.log("groupslist");
+			console.log(groupslist);
 			resolve(groupslist);
 		})
 		.then(result => {
