@@ -246,7 +246,7 @@ module.exports = router => {
 					console.log(groupObject);
 			
 					if (err) console.log(err);
-					groupslist.add(groupObject);
+					groupslist.push(groupObject);
 
 					console.log("groupslist");
 					console.log(groupslist);
