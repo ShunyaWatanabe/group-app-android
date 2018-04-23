@@ -226,37 +226,14 @@ module.exports = router => {
 	});
 
 
-
-
-
-
-
 	//download group upon login
 	router.get('/groups/:getgroup', (req, res) =>{
 		console.log("router to getgroup");
 
 		var groupslist = [];
 
-
 		user.findOne({'private_key':req.params.getgroup},function(err,doc){
 			if (err) console.log(err);
-
-
-			// doc.groups_participated.forEach(function(groupID){
-			// 	group.findById(groupID, "_id name",function(err,groupObject){
-			// 		if (err) console.log(err);
-			// 		groupslist.push(groupObject);
-			// 	});
-			// });
-
-
-
-
-
-				
-			
-
-
 
 			async.each(doc.groups_participated,
 
@@ -268,9 +245,6 @@ module.exports = router => {
 						console.log("push one");
 					})
 					.then(()=>callback(null));
-
-					 // callback(null);
-					// groupID.someAsyncCall(function(){callback();});
 				},
 
 				function(err){ 
@@ -280,11 +254,7 @@ module.exports = router => {
 					res.status(201).json({message: "Get group succeed!",groups: groupslist});
 				}
 			);
-			// console.log("aterall");
-
-
-
-
+	
 		})
 		.catch(err=> {
 			res.status(err.status).json({ message: err.message })
