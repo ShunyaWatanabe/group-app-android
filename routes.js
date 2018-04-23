@@ -268,7 +268,7 @@ module.exports = router => {
 						console.log("push one");
 					});
 
-					// return callback(null);
+					 return callback(null);
 					// groupID.someAsyncCall(function(){callback();});
 				},
 
