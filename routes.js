@@ -227,6 +227,8 @@ module.exports = router => {
 	//download group upon login
 	router.get('/groups/:getgroup', (req, res) =>{
 		console.log("router to getgroup");
+
+
 		user.findOne({'private_key':req.params.getgroup},function(err,doc){
 			if (err) console.log(err);
 
@@ -248,16 +250,19 @@ module.exports = router => {
 					if (err) console.log(err);
 					groupslist.push(groupObject);
 
+					console.log("groupslist");
+					console.log(groupslist);
+					console.log(typeof groupslist);
+					console.log(typeof groupslist[0]);
+
+
 			
 				});
 
 			});
 
 
-			console.log("groupslist");
-			console.log(groupslist);
-			console.log(typeof groupslist);
-			console.log(typeof groupslist[0]);
+		
 
 			res.status(201).json({message: "Get group succeed!",groups: groupslist});	
 
