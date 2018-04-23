@@ -225,11 +225,10 @@ module.exports = router => {
 
 
 	//download group upon login
-	router.get('/groups/:getgroup', (req, res) =>{
+	router.get('/groups/:getgroup', (req, res) => {
 		console.log("router to getgroup");
 
 		var groupslist = [];
-
 
 		new Promise((resolve,reject)=>{
 
@@ -256,21 +255,16 @@ module.exports = router => {
 						console.log(typeof groupslist[0]);
 					});
 				});
-				
 			});
 			
 			resolve(groupslist);
-
 		})
 		.then(result => {
 			res.status(201).json({message: "Get group succeed!",groups: result});	
 		})
 		.catch(err=>{
 			res.status(err.status).json({ message: err.message });
-
 		});
-
-
 	}
 
 
