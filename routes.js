@@ -2,6 +2,8 @@
 
 const auth = require('basic-auth');
 const jwt = require('jsonwebtoken');
+const async = require("async");
+
 
 const config = require('./config/config.json');
 const user = require('./models/user');
@@ -239,49 +241,55 @@ module.exports = router => {
 		user.findOne({'private_key':req.params.getgroup},function(err,doc){
 			if (err) console.log(err);
 
-			doc.groups_participated.forEach(function(groupID){
-				group.findById(groupID, "_id name",function(err,groupObject){
-					if (err) console.log(err);
-					groupslist.push(groupObject);
 
-					console.log(typeof groupslist);
-					console.log(typeof groupslist[0]);
+			// doc.groups_participated.forEach(function(groupID){
+			// 	group.findById(groupID, "_id name",function(err,groupObject){
+			// 		if (err) console.log(err);
+			// 		groupslist.push(groupObject);
+			// 	});
+			// });
+
+
+
+
+
+				
+			
+
+
+
+			async.each(doc.groups_participated,
+
+				function(groupID,callback){
+
+					group.findById(groupID, "_id name",function(err,groupObject){
+						if (err) console.log(err);
+						groupslist.push(groupObject);
+					});
+
+					return callback(null);
+				
+				},
+
+				function(err){ 
+					if (err) console.log(err);
+					console.log("groupslist");
+					console.log(groupslist);
+					res.status(201).json({message: "Get group succeed!",groups: groupslist});
 				});
-			});
-		})
-		.then(()=>{
-			console.log("groupslist");
-			console.log(groupslist);
-			res.status(201).json({message: "Get group succeed!",groups: groupslist});
+
+
+
 
 		})
 		.catch(err=> {
 			res.status(err.status).json({ message: err.message })
 		});
 
+	
 
 			
 	});
-
-
-
-  // var query = Band.findOne({name: "Guns N' Roses"});
-
-  //   query.select('name occupation');
-
-  //   query.then(function (doc) {
-  //     // use doc
-  //   });
-
-
-  //   query.exec().then(function (doc) {
-  //     // use doc
-  //   });
-  
-
-
-
-
 
 
 
