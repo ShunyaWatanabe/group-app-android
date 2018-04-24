@@ -173,37 +173,31 @@ module.exports = router => {
 
 		console.log(req.body);
 
-	
-
-		console.log("test1");
 		invite.getGroupByInvite(req.body[1])
 		.then(groupID => {
 
 			try{
 
-				console.log("test3");
+				
 				user.findOne({private_key: req.body[0]},function(err,userObject){
 					if (err) console.log(err);
-					console.log("test4");
-					console.log(groupID);
+					console.log(groupID in userObject.groups_participated);
+					
 					userObject.groups_participated.push(groupID);
-					console.log("test5");
-					console.log(userObject.groups_participated);
+					
 					userObject.save();
 					
 					//add a check here. groupID has to be of group._id format. The exception is not handled!!!!!
 
 					group.findOne({_id:groupID},function(err,groupObject){
 						if (err) console.log(err);
-						console.log("test6");
-						console.log(userObject._id);
+						console.log(userObject._i in groupObject.members);
 						groupObject.members.push(userObject._id);
 						groupObject.save();
-						console.log("test7");
-						console.log(groupObject.members);
+						
 					})
 					.then(()=>{
-						console.log("test8");
+					
 
 						res.status(201).json({message: "Join Successful"});
 						//we might have to return more
