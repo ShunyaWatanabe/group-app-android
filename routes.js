@@ -171,21 +171,35 @@ module.exports = router => {
 	router.post('/groups/joininvite', (req, res) => {	
 		const groupID = null;
 
+		console.log(req.body);
+
 		try{
-			if (req.body[1] in invite.currentInvites) 
+			console.log("test1");
+			if (req.body[1] in invite.currentInvites) {
 				groupID = invite.currentInvites[req.body[1]];
+				console.log("test2");
+			}
 
 			if (groupID != null){
 
+				console.log("test3");
 				user.findOne({private_key: req.body[0]},function(err,userObject){
 					if (err) console.log(err);
+					console.log("test4");
+					console.log(groupID);
 					userObject.groups_participated.push(groupID);
+					console.log("test5");
 
 					group.findOne({_id:groupID},function(err,groupObject){
 						if (err) console.log(err);
+						console.log("test6");
+						console.log(userObject._id);
 						groupObject.members.push(userObject._id);
+						console.log("test7");
 					})
 					.then(()=>{
+						console.log("test8");
+
 						res.status(201).json({message: "Join Successful"});
 						//we might have to return more
 					});
