@@ -175,6 +175,7 @@ module.exports = router => {
 
 		try{
 			console.log("test1");
+			cnosole.log(req.body[1] in invite.currentInvites);
 			if (req.body[1] in invite.currentInvites) {
 				groupID = invite.currentInvites[req.body[1]];
 				console.log("test2");
