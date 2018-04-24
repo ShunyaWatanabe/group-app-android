@@ -189,6 +189,7 @@ module.exports = router => {
 					userObject.groups_participated.push(groupID);
 					console.log("test5");
 					console.log(userObject.groups_participated);
+					userObject.save();
 					
 					//add a check here. groupID has to be of group._id format. The exception is not handled!!!!!
 
@@ -197,6 +198,7 @@ module.exports = router => {
 						console.log("test6");
 						console.log(userObject._id);
 						groupObject.members.push(userObject._id);
+						groupObject.save();
 						console.log("test7");
 					})
 					.then(()=>{
