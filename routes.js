@@ -173,45 +173,45 @@ module.exports = router => {
 
 		console.log(req.body);
 
-		
+	
 
-			console.log("test1");
-			invite.etGroupByInvite(req.body[1])
-			.then(groupID => {
+		console.log("test1");
+		invite.getGroupByInvite(req.body[1])
+		.then(groupID => {
 
-				try{
+			try{
 
-					console.log("test3");
-					user.findOne({private_key: req.body[0]},function(err,userObject){
+				console.log("test3");
+				user.findOne({private_key: req.body[0]},function(err,userObject){
+					if (err) console.log(err);
+					console.log("test4");
+					console.log(groupID);
+					userObject.groups_participated.push(groupID);
+					console.log("test5");
+
+					group.findOne({_id:groupID},function(err,groupObject){
 						if (err) console.log(err);
-						console.log("test4");
-						console.log(groupID);
-						userObject.groups_participated.push(groupID);
-						console.log("test5");
+						console.log("test6");
+						console.log(userObject._id);
+						groupObject.members.push(userObject._id);
+						console.log("test7");
+					})
+					.then(()=>{
+						console.log("test8");
 
-						group.findOne({_id:groupID},function(err,groupObject){
-							if (err) console.log(err);
-							console.log("test6");
-							console.log(userObject._id);
-							groupObject.members.push(userObject._id);
-							console.log("test7");
-						})
-						.then(()=>{
-							console.log("test8");
-
-							res.status(201).json({message: "Join Successful"});
-							//we might have to return more
-						});
+						res.status(201).json({message: "Join Successful"});
+						//we might have to return more
 					});
+				});
 
-				}catch(err) {res.status(err.status).json({ message: err.message });};
+			}catch(err) {res.status(err.status).json({ message: err.message });};
 
-			})
-			.catch(() => {
-				res.status(404).json({ message: "Invitation Not Found"});
-			});
+		})
+		.catch(() => {
+			res.status(404).json({ message: "Invitation Not Found"});
+		});
+	
 		
-			
 
 	
 
