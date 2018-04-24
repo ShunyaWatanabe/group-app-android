@@ -181,17 +181,21 @@ module.exports = router => {
 				
 				user.findOne({private_key: req.body[0]},function(err,userObject){
 					if (err) console.log(err);
-					console.log(groupID in userObject.groups_participated);
+
+					//console.log(groupID in userObject.groups_participated);
 					
+					//todo before we push, we need to know whether the object already exists...
 					userObject.groups_participated.push(groupID);
+
 					
 					userObject.save();
 					
-					//add a check here. groupID has to be of group._id format. The exception is not handled!!!!!
+					//todo add a check here. groupID has to be of group._id format. The exception is not handled!!!!!
 
 					group.findOne({_id:groupID},function(err,groupObject){
 						if (err) console.log(err);
-						console.log(userObject._i in groupObject.members);
+						//console.log(userObject._i in groupObject.members);
+						//todo before we push, we need to know whether the object already exists...
 						groupObject.members.push(userObject._id);
 						groupObject.save();
 						
