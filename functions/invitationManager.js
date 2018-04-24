@@ -21,6 +21,12 @@ function check(tempCode){
 	console.log((tempCode in currentInvites)||(codePool.includes(tempCode)))
 }
 
+exports.getGroupByInvite = (code) => 
+	new Promise((resolve,reject) => {
+		if (code in currentInvites) resolve (currentInvites[code]);
+		else reject();
+	});
+
 exports.getNewInvite = (groupID) => 
 	
 	new Promise((resolve,reject) => {

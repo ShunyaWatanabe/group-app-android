@@ -173,50 +173,46 @@ module.exports = router => {
 
 		console.log(req.body);
 
-		try{
-			cnosole.log(typeof invite);
+		
+
 			console.log("test1");
-			cnosole.log(typeof invite);
-			cnosole.log(typeof invite.currentInvites);
-			cnosole.log(invite.currentInvites);
-			if (req.body[1] in invite.currentInvites) {
-				groupID = invite.currentInvites[req.body[1]];
-				console.log("test2");
-			}
+			invite.etGroupByInvite(req.body[1])
+			.then(groupID => {
 
-			if (groupID != null){
+				try{
 
-				console.log("test3");
-				user.findOne({private_key: req.body[0]},function(err,userObject){
-					if (err) console.log(err);
-					console.log("test4");
-					console.log(groupID);
-					userObject.groups_participated.push(groupID);
-					console.log("test5");
-
-					group.findOne({_id:groupID},function(err,groupObject){
+					console.log("test3");
+					user.findOne({private_key: req.body[0]},function(err,userObject){
 						if (err) console.log(err);
-						console.log("test6");
-						console.log(userObject._id);
-						groupObject.members.push(userObject._id);
-						console.log("test7");
-					})
-					.then(()=>{
-						console.log("test8");
+						console.log("test4");
+						console.log(groupID);
+						userObject.groups_participated.push(groupID);
+						console.log("test5");
 
-						res.status(201).json({message: "Join Successful"});
-						//we might have to return more
+						group.findOne({_id:groupID},function(err,groupObject){
+							if (err) console.log(err);
+							console.log("test6");
+							console.log(userObject._id);
+							groupObject.members.push(userObject._id);
+							console.log("test7");
+						})
+						.then(()=>{
+							console.log("test8");
+
+							res.status(201).json({message: "Join Successful"});
+							//we might have to return more
+						});
 					});
-				});
-				//find user find group and connect
-				//private key: req.body[0]
 
+				}catch(err) {res.status(err.status).json({ message: err.message });};
 
-
-			}else{
+			})
+			.catch(() => {
 				res.status(404).json({ message: "Invitation Not Found"});
-			}
-		}catch(err) {res.status(err.status).json({ message: err.message });};
+			});
+		
+			
+
 	
 
 
