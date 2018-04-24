@@ -200,6 +200,7 @@ module.exports = router => {
 						groupObject.members.push(userObject._id);
 						groupObject.save();
 						console.log("test7");
+						console.log(groupObject.members);
 					})
 					.then(()=>{
 						console.log("test8");
