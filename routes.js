@@ -208,6 +208,7 @@ module.exports = router => {
 
 		})
 		.catch(() => {
+			console.log("not found");
 			res.status(404).json({ message: "Invitation Not Found"});
 		});
 	
