@@ -169,7 +169,7 @@ module.exports = router => {
 
 	//join group operation
 	router.post('/groups/joininvite', (req, res) => {	
-		const groupID;
+		const groupID = null;
 
 		try{
 			if (req.body[1] in invite.currentInvites) 
