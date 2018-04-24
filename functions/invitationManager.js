@@ -3,7 +3,7 @@
 const group = require('../models/group');
 const user = require('../models/user');
 
-var currentInvites = {'1111','2222'};
+var currentInvites = {};
 var codePool = [];
 
 for (var i=0;i<80;i++){
