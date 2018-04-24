@@ -12,7 +12,6 @@ const group = require('./models/group');
 const checkingTokens = require('./functions/checkTokens');
 const profile = require('./functions/profile');
 const register = require('./functions/register');
-// const login = require('./functions/login');
 const create = require('./functions/create');
 const invite = require('./functions/invitationManager');
 
@@ -67,31 +66,6 @@ module.exports = router => {
 	        }
 	    });
 	});
-
-
-	// //user login operation
-	// router.post('/users/login', (req, res) => {
-
-	// 	const credentials = auth(req);
-
-	// 	if (!credentials) {
-
-	// 		res.status(400).json({ message: 'Invalid Request !' });
-
-	// 	} else {
-
-	// 		login.loginUser(credentials.private_key, req.body.fcm_token)
-
-	// 		.then(result => {
-
-	// 			const token = jwt.sign(result, config.secret, { expiresIn: 20 });
-	// 			res.status(result.status).json({ message: result.message, token: token, refresh_token: result.refresh_token });
-
-	// 		})
-
-	// 		.catch(err => res.status(err.status).json({ message: err.message }));
-	// 	}
-	// });
 
 	//relogin
 	router.post('/users/relogin', (req, res) => {
@@ -193,97 +167,41 @@ module.exports = router => {
 	// });
 
 
+	//join group operation
+	router.post('/groups/joininvite', (req, res) => {	
+		const groupID;
 
+		try{
+			if (req.body[1] in invite.currentInvites) 
+				groupID = invite.currentInvites[req.body[1]];
 
+			if (groupID != null){
 
-	//create or join group operation
-	router.post('/groups/joingroup', (req, res) => {
+				user.findOne({private_key: req.body[0]},function(err,userObject){
+					if (err) console.log(err);
+					userObject.groups_participated.push(groupID);
 
-		//check if code is invitation
-			//if yes, find group by invitation in the db and put the user inside
-			//if no. response and ask user for location data 
-	
-		create.createGroup(req.body.user)
-		.then(result => {
-			res.status(result.status).json({ message: result.message});
-		})
-		.catch(err => res.status(err.status).json({ message: err.message }));
-	
-	});
-
-
-	//change Username
-	router.post('/users/changeUserName', (req, res) => {
-		console.log("router to changeUserName");
-
-		user.findOne({'private_key':req.body[1]},function(err,doc){
-			if (err) console.log(err);
-			doc.name = req.body[0];
-			doc.save(function(err){if (err) console.log(err);});
-			res.status(201).json({message:req.body[0]});
-		})
-		.catch(err => res.status(err.status).json({ message: err.message }));
-	});
-
-
-	//download group upon login
-	router.get('/groups/:getgroup', (req, res) =>{
-		console.log("router to getgroup");
-
-		var groupslist = [];
-
-		user.findOne({'private_key':req.params.getgroup},function(err,doc){
-			if (err) console.log(err);
-
-			async.each(doc.groups_participated,
-
-				function(groupID,callback){
-
-					group.findById(groupID, "_id name",function(err,groupObject){
+					group.findOne({_id:groupID},function(err,groupObject){
 						if (err) console.log(err);
-						groupslist.push(groupObject);
-						console.log("push one");
+						groupObject.members.push(userObject._id);
 					})
-					.then(()=>callback(null));
-				},
+					.then(()=>{
+						res.status(201).json({message: "Join Successful"});
+						//we might have to return more
+					});
+				});
+				//find user find group and connect
+				//private key: req.body[0]
 
-				function(err){ 
-					console.log("groupslist");
-					
-					groupslist = groupslist.filter(function(n){return n!=null});
-					console.log(groupslist);
-					res.status(201).json({message: "Get group succeed!",groups: groupslist});
-				}
-			);
-	
-		})
-		.catch(err=> {
-			res.status(err.status).json({ message: err.message })
-		});
 
+
+			}else{
+				res.status(404).json({ message: "Invitation Not Found"});
+			}
+		}catch(err) {res.status(err.status).json({ message: err.message });};
 	
 
-			
-	});
 
-
-
-
-
-
-
-
-	//get invitation code
-	router.get('/groups/invite/:getinvitationcode', (req, res) =>{
-		console.log("router to invitation");
-		
-		invite.getNewInvite(req.params.getinvitationcode)
-		.then(result =>{
-			res.status(201).json({message: result});
-		})
-		.catch(err =>{
-			res.status(err.status).json({ message: err.message })
-		})
 	});
 
 	//user leave group
@@ -301,6 +219,67 @@ module.exports = router => {
 			res.status(err.status).json({ message: err.message })
 		});
 	});
+
+
+	//create group operation
+	router.post('/groups/newgroup', (req, res) => {	
+		create.createGroup(req.body.user)
+		.then(result => {
+			res.status(result.status).json({ message: result.message});
+		})
+		.catch(err => res.status(err.status).json({ message: err.message }));
+	});
+
+	//change Username
+	router.post('/users/changeUserName', (req, res) => {
+		console.log("router to changeUserName");
+
+		user.findOne({'private_key':req.body[1]},function(err,doc){
+			if (err) console.log(err);
+			doc.name = req.body[0];
+			doc.save(function(err){if (err) console.log(err);});
+			res.status(201).json({message:req.body[0]});
+		})
+		.catch(err => res.status(err.status).json({ message: err.message }));
+	});
+
+	//download group upon login
+	router.get('/groups/:getgroup', (req, res) =>{
+		console.log("router to getgroup");
+		var groupslist = [];
+		user.findOne({'private_key':req.params.getgroup},function(err,doc){
+			if (err) console.log(err);
+			async.each(doc.groups_participated,
+				function(groupID,callback){
+					group.findById(groupID, "_id name",function(err,groupObject){
+						if (err) console.log(err);
+					})
+					.then(()=>callback(null));
+				},
+				function(err){ 
+					res.status(201).json({message: "Get group succeed!",groups: groupslist});
+				}
+			);
+		})
+		.catch(err=> {
+			res.status(err.status).json({ message: err.message })
+		});		
+	});
+
+	//get invitation code
+	router.get('/groups/invite/:getinvitationcode', (req, res) =>{
+		console.log("router to invitation");
+		
+		invite.getNewInvite(req.params.getinvitationcode)
+		.then(result =>{
+			res.status(201).json({message: result});
+		})
+		.catch(err =>{
+			res.status(err.status).json({ message: err.message })
+		})
+	});
+
+
 
 
 

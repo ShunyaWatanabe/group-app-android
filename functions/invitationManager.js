@@ -4,7 +4,7 @@ const group = require('../models/group');
 const user = require('../models/user');
 
 var currentInvites = {};
-var codePool = ['1111','2222','3333','4444'];
+var codePool = [];
 
 for (var i=0;i<80;i++){
 	addToPool();
@@ -27,7 +27,8 @@ exports.getNewInvite = (groupID) =>
 
 		var code = codePool.pop();
 		addToPool();
-		currentInvites[code] = groupID;		
+		currentInvites[code] = groupID;
+		
 		resolve(code);
 		
 		setTimeout(function(){ 
@@ -36,4 +37,3 @@ exports.getNewInvite = (groupID) =>
 
 		
 	});
-	
