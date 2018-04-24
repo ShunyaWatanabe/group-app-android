@@ -188,20 +188,22 @@ module.exports = router => {
 					console.log(groupID);
 					userObject.groups_participated.push(groupID);
 					console.log("test5");
+					try{
+						group.findOne({_id:groupID},function(err,groupObject){
+							if (err) console.log(err);
+							console.log("test6");
+							console.log(userObject._id);
+							groupObject.members.push(userObject._id);
+							console.log("test7");
+						})
+						.then(()=>{
+							console.log("test8");
 
-					group.findOne({_id:groupID},function(err,groupObject){
-						if (err) console.log(err);
-						console.log("test6");
-						console.log(userObject._id);
-						groupObject.members.push(userObject._id);
-						console.log("test7");
-					})
-					.then(()=>{
-						console.log("test8");
-
-						res.status(201).json({message: "Join Successful"});
-						//we might have to return more
-					});
+							res.status(201).json({message: "Join Successful"});
+							//we might have to return more
+						})
+					}catch(err) {res.status(err.status).json({ message: err.message });};
+					
 				});
 
 			}catch(err) {res.status(err.status).json({ message: err.message });};
