@@ -174,6 +174,7 @@ module.exports = router => {
 		console.log(req.body);
 
 		try{
+			cnosole.log(typeof invite);
 			console.log("test1");
 			cnosole.log(typeof invite);
 			cnosole.log(typeof invite.currentInvites);
