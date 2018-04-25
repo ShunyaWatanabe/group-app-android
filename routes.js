@@ -182,21 +182,10 @@ module.exports = router => {
 				user.findOne({private_key: req.body[0]},function(err,userObject){
 					if (err) console.log(err);
 
-					console.log(userObject.groups_participated);
-					console.log(userObject.groups_participated[0]);
-					console.log(typeof userObject.groups_participated[0]);
-					console.log(groupID);
-					console.log(typeof groupID);
+					console.log(userObject.groups_participated.length());
+					
 					console.log(groupID == userObject.groups_participated[0]);
-					console.log(id == userObject.groups_participated[0]);
 
-					var id = mongoose.Types.ObjectId(groupID);
-					console.log(id == userObject.groups_participated[0]);
-					console.log(id);
-					console.log(typeof id);
-					console.log(userObject.groups_participated.includes(id));
-
-					console.log(userObject.groups_participated.includes(groupID));
 					
 					//todo before we push, we need to know xwhether the object already exists...
 					userObject.groups_participated.push(groupID);
