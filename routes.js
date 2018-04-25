@@ -187,8 +187,11 @@ module.exports = router => {
 					console.log(typeof userObject.groups_participated[0]);
 					console.log(groupID);
 					console.log(typeof groupID);
+					console.log(groupID == userObject.groups_participated[0]);
+					console.log(id == userObject.groups_participated[0]);
 
 					var id = mongoose.Types.ObjectId(groupID);
+					console.log(id == userObject.groups_participated[0]);
 					console.log(id);
 					console.log(typeof id);
 					console.log(userObject.groups_participated.includes(id));
