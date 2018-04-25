@@ -182,14 +182,21 @@ module.exports = router => {
 				user.findOne({private_key: req.body[0]},function(err,userObject){
 					if (err) console.log(err);
 
+					// new Promise((resolve,reject)=>{
+					// 	var i;
+					// 	for (i=0;i<userObject.groups_participated.length;i++){
+					// 		if (groupID == userObject.groups_participated[0]){
+					// 			reject();
+					// 			break;
+					// 		}
+					// 	}
+					// 	resolve("Successful");
+					// })
+					// .then(result=>{console.log(result);})
+					// .catch(()=>{})
 
-					console.log(groupID == userObject.groups_participated[0]);
-					var i;
-					for (i=0;i<userObject.groups_participated.length;i++){
-						if (groupID == userObject.groups_participated[0]){
-							break;
-						}
-					}
+
+					console.log(userObject.groups_participated.includes(groupID);
 					
 					//todo before we push, we need to know xwhether the object already exists...
 					userObject.groups_participated.push(groupID);
