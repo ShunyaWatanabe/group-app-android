@@ -3,6 +3,8 @@
 const auth = require('basic-auth');
 const jwt = require('jsonwebtoken');
 const async = require("async");
+const mongoose = require('mongoose');
+
 
 
 const config = require('./config/config.json');
