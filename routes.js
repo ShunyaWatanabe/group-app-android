@@ -196,7 +196,7 @@ module.exports = router => {
 					// .catch(()=>{})
 
 
-					console.log(userObject.groups_participated.includes(groupID);
+					console.log(userObject.groups_participated.includes(groupID));
 					
 					//todo before we push, we need to know xwhether the object already exists...
 					userObject.groups_participated.push(groupID);
