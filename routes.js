@@ -180,6 +180,9 @@ module.exports = router => {
 				user.findOne({private_key: req.body[0]},function(err,userObject){
 					if (err) console.log(err);
 
+					console.log(userObject.groups_participated);
+					console.log(groupID);
+
 					console.log(userObject.groups_participated.includes(groupID));
 					
 					//todo before we push, we need to know xwhether the object already exists...
