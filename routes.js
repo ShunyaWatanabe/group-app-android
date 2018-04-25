@@ -181,7 +181,10 @@ module.exports = router => {
 					if (err) console.log(err);
 
 					console.log(userObject.groups_participated);
+					console.log(userObject.groups_participated[0]);
+					console.log(typeof userObject.groups_participated[0]);
 					console.log(groupID);
+					console.log(typeof groupID);
 
 					console.log(userObject.groups_participated.includes(groupID));
 					
