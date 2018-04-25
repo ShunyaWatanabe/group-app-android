@@ -177,16 +177,13 @@ module.exports = router => {
 		.then(groupID => {
 
 			try{
-
-				
 				user.findOne({private_key: req.body[0]},function(err,userObject){
 					if (err) console.log(err);
 
-					//console.log(groupID in userObject.groups_participated);
+					console.log(groupID in userObject.groups_participated);
 					
-					//todo before we push, we need to know whether the object already exists...
+					//todo before we push, we need to know xwhether the object already exists...
 					userObject.groups_participated.push(groupID);
-
 					
 					userObject.save();
 					
