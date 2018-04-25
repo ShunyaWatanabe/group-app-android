@@ -186,6 +186,10 @@ module.exports = router => {
 					console.log(groupID);
 					console.log(typeof groupID);
 
+					var id = mongoose.Types.ObjectId(groupID);
+					console.log(id);
+					console.log(userObject.groups_participated.includes(id));
+
 					console.log(userObject.groups_participated.includes(groupID));
 					
 					//todo before we push, we need to know xwhether the object already exists...
