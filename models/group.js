@@ -12,8 +12,8 @@ const Schema = mongoose.Schema;
 const groupSchema = mongoose.Schema({
 
 	name: String,
-	members:[{type: Schema.Types.ObjectId, ref: 'user'}],
-	conversation: [{type: Schema.Types.ObjectId, ref: 'message'}],
+	members:[String],
+	conversation: [String],
 	created_at: String
 	});
 
