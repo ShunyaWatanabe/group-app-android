@@ -12,7 +12,7 @@ for (var i=0;i<80;i++){
 
 function addToPool(){
 	do{var tempCode = Math.floor((Math.random() * 10000)) -10;
-		if (tempCode<1000) tempCode+=1000;
+		if (tempCode<1000) tempCode+=2000;
 	}while((tempCode in currentInvites)||(codePool.includes(tempCode)));
 	codePool.push(tempCode.toString());
 }
