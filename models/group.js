@@ -13,7 +13,7 @@ const groupSchema = mongoose.Schema({
 
 	name: String,
 	members:[String],
-	conversation: [{type: Schema.Types.ObjectId, ref: 'message'}],
+	conversation: [String],
 	created_at: String
 	});
 

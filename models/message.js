@@ -11,9 +11,9 @@ const Schema = mongoose.Schema;
 
 const messageSchema = mongoose.Schema({
 
-	group: {type: Schema.Types.ObjectId, required: true},
+	group: {type: String, required: true},
 	text: {type: String, required: true},
-	sender:{type: Schema.Types.ObjectId, ref: 'user'},
+	sender:String,
 	created_at: String
 	});
 
