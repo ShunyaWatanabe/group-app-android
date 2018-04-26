@@ -196,12 +196,8 @@ module.exports = router => {
 		user.findOne({'private_key':req.body[0]},function(err,doc){
 			if (err) console.log(err);
 			doc.groups_participated = doc.groups_participated.filter(function(item){
-				console.log(item);
-				console.log(typeof item);
-				console.log(item.equals("111"));
-				console.log("111".equals("111"));
-				console.log("112".equals("111"));
-				return !item.equals(req.body[1]);
+				
+				return !(item.equals==req.body[1]);
 			});
 			console.log("why fail1");
 			doc.save(function(err){if (err) console.log(err);});
