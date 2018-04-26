@@ -193,7 +193,11 @@ module.exports = router => {
 
 					group.findOne({_id:groupID},function(err,groupObject){
 						if (err) console.log(err);
-
+						console.log(groupObject);
+						console.log(userObject);
+						console.log(userObject._id);
+						console.log(groupObject.members);
+										//here it does ot work
 						if(!(groupObject.members.includes(userObject._id))){
 						
 							groupObject.members.push(userObject._id);
