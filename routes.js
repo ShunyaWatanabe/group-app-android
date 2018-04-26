@@ -196,15 +196,23 @@ module.exports = router => {
 		
 		if (mongoose.Types.ObjectId.isValid(req.body[1])){
 
-
-
-			user.findOne({'private_key':req.body[0]},function(err,doc){
+			user.findOne({'private_key':req.body[0]},function(err,userObject){
 				if (err) console.log(err);
-				doc.groups_participated = doc.groups_participated.filter(function(item){
-					console.log(item==req.body[1]);
+				userObject.groups_participated = doc.groups_participated.filter(function(item){
+					
 					return !(item==req.body[1]);
 				});
-				doc.save(function(err){if (err) console.log(err);});
+				userObject.save(function(err){if (err) console.log(err);});
+
+				group.findOne({"_id":req.body[1]},function(err,groupObject){
+					if (err) console.log(err);
+					groupObject.members = doc.members.filter(function(user){
+						console.log(user==userObject._id);
+						return !(user==userObject._id);
+					});
+					groupObject.save(function(err){if (err) console.log(err);});
+
+				});
 				
 				res.status(201).json({message: "remove succeed!" ,id: req.body[1]});	
 				
