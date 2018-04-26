@@ -260,10 +260,10 @@ module.exports = router => {
 	});
 
 	//download group upon login
-	router.get('/groups/:getgroup', (req, res) =>{
-		console.log("router to getgroup");
+	router.get('/groups/:getgroups', (req, res) =>{
+		console.log("router to getgroups");
 		var groupslist = [];
-		user.findOne({'private_key':req.params.getgroup},function(err,doc){
+		user.findOne({'private_key':req.params.getgroups},function(err,doc){
 			if (err) console.log(err);
 			async.each(doc.groups_participated,
 				function(groupID,callback){
