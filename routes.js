@@ -199,6 +199,8 @@ module.exports = router => {
 				console.log(item);
 				console.log(typeof item);
 				console.log(item.equals("111"));
+				console.log("111".equals("111"));
+				console.log("112".equals("111"));
 				return !item.equals(req.body[1]);
 			});
 			console.log("why fail1");
