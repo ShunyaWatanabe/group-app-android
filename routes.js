@@ -189,28 +189,20 @@ module.exports = router => {
 						userObject.save();
 					}
 					
-					//todo add a check here. groupID has to be of group._id format. The exception is not handled!!!!!
-
 					group.findOne({_id:groupID},function(err,groupObject){
 						if (err) console.log(err);
-					
-						console.log((groupObject.members.includes(userObject._id.toString())));
 									
-						if(!(groupObject.members.includes(userObject._id))){
+						if(!(groupObject.members.includes(userObject._id.toString()))){
 						
 							groupObject.members.push(userObject._id.toString());
 							groupObject.save();
 						}
-						
 					})
 					.then(()=>{
 					
-
 						res.status(201).json({message: "Join Successful"});
 						//we might have to return more
 					})
-					
-					
 				});
 
 			}catch(err) {res.status(err.status).json({ message: err.message });};
