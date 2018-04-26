@@ -25,7 +25,6 @@ function check(tempCode){
 
 exports.getGroupByInvite = (code) => 
 	new Promise((resolve,reject) => {
-		console.log(mongoose.Types.ObjectId.isValid(currentInvites[code]));
 		if (code in currentInvites && mongoose.Types.ObjectId.isValid(currentInvites[code])) 
 			resolve (currentInvites[code]);
 		else reject();
