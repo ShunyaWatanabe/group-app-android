@@ -269,6 +269,7 @@ module.exports = router => {
 				function(groupID,callback){
 					group.findById(groupID, "_id name",function(err,groupObject){
 						if (err) console.log(err);
+						groupslist.put(groupObject);
 					})
 					.then(()=>callback(null));
 				},
