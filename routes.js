@@ -198,6 +198,7 @@ module.exports = router => {
 			doc.groups_participated = doc.groups_participated.filter(function(item){
 				console.log(item);
 				console.log(typeof item);
+				console.log(item.equals("111"));
 				return !item.equals(req.body[1]);
 			});
 			console.log("why fail1");
