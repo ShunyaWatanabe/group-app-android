@@ -181,7 +181,7 @@ module.exports = router => {
 			try{
 				user.findOne({private_key: req.body[0]},function(err,userObject){
 					if (err) console.log(err);
-
+					console.log("find user");
 
 
 					if(!(userObject.groups_participated.includes(groupID))){
@@ -191,6 +191,8 @@ module.exports = router => {
 					
 					group.findOne({_id:groupID},function(err,groupObject){
 						if (err) console.log(err);
+						console.log("find group");
+
 									
 						if(!(groupObject.members.includes(userObject._id.toString()))){
 						
@@ -205,7 +207,7 @@ module.exports = router => {
 					})
 				});
 
-			}catch(err) {res.status(err.status).json({ message: err.message });};
+			}catch(err) {console.log("not find group");res.status(err.status).json({ message: err.message });};
 
 		})
 		.catch(() => {
