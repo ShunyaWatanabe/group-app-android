@@ -193,22 +193,27 @@ module.exports = router => {
 	//user leave group
 	router.post('/groups/leavegroup', (req, res) =>{
 		console.log("router to leavegroup");
-		user.findOne({'private_key':req.body[0]},function(err,doc){
-			if (err) console.log(err);
-			doc.groups_participated = doc.groups_participated.filter(function(item){
+		
+		if (mongoose.Types.ObjectId.isValid(req.body[1])){
+
+
+
+			user.findOne({'private_key':req.body[0]},function(err,doc){
+				if (err) console.log(err);
+				doc.groups_participated = doc.groups_participated.filter(function(item){
+					return !(item.equals==req.body[1]);
+				});
+				doc.save(function(err){if (err) console.log(err);});
 				
-				return !(item.equals==req.body[1]);
+				res.status(201).json({message: "remove succeed!" ,id: req.body[1]});	
+				
+			})
+			.catch(err=> {
+				res.status(err.status).json({ message: err.message });
 			});
-			console.log("why fail1");
-			doc.save(function(err){if (err) console.log(err);});
-			console.log("why fail2");
-			console.log(req.body[1]);
-			res.status(201).json({message: "remove succeed!" ,id: req.body[1]});	
-			console.log("why fail3");
-		})
-		.catch(err=> {
-			res.status(err.status).json({ message: err.message })
-		});
+		}else{
+			res.status(404).json({ message: "group ID not found"});
+		}
 	});
 
 
