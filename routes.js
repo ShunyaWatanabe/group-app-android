@@ -144,31 +144,6 @@ module.exports = router => {
 
 	});
 
-
-	// router.get('/users/search/:query', (req,res) => {
-
-	// 		checkingTokens.checkTokens(req)
-
-	// 		.then(result => {
-
-	// 			search.users(req.params.query)
-
-	// 			.then(result1 =>{
-
-	// 				result1 = createResponse(result, result1);
-
-	// 				res.status(result.status).json(result1);
-	// 			})
-
-	// 			.catch(err1 => res.status(err1.status).json({ message: err1.message }));
-
-	// 		})
-
-	// 		.catch(err => res.status(err.status).json({ message: err.message }));
-
-	// });
-
-
 	//join group operation
 	router.post('/groups/joininvite', (req, res) => {	
 		const groupID = null;
@@ -213,11 +188,6 @@ module.exports = router => {
 			res.status(404).json({ message: "Invitation Not Found"});
 		});
 	
-		
-
-	
-
-
 	});
 
 	//user leave group
@@ -228,8 +198,12 @@ module.exports = router => {
 			doc.groups_participated = doc.groups_participated.filter(function(item){
 				return !item.equals(req.body[1]);
 			});
+			console.log("why fail1");
 			doc.save(function(err){if (err) console.log(err);});
+			console.log("why fail2");
+			console.log(req.body[1]);
 			res.status(201).json({message: "remove succeed!" ,id: req.body[1]});	
+			console.log("why fail3");
 		})
 		.catch(err=> {
 			res.status(err.status).json({ message: err.message })
@@ -295,12 +269,6 @@ module.exports = router => {
 			res.status(err.status).json({ message: err.message })
 		})
 	});
-
-
-
-
-
-	
 
 
 }
