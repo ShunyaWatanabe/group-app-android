@@ -2,6 +2,8 @@
 
 const group = require('../models/group');
 const user = require('../models/user');
+const mongoose = require('mongoose');
+
 
 var currentInvites = {};
 var codePool = [];
@@ -18,12 +20,14 @@ function addToPool(){
 }
 
 function check(tempCode){
-	console.log((tempCode in currentInvites)||(codePool.includes(tempCode)))
+	console.log((tempCode in currentInvites)||(codePool.includes(empCode)))
 }
 
 exports.getGroupByInvite = (code) => 
 	new Promise((resolve,reject) => {
-		if (code in currentInvites) resolve (currentInvites[code]);
+		console.log(mongoose.Types.ObjectId.isValid(currentInvites[code]));
+		if (code in currentInvites && mongoose.Types.ObjectId.isValid(currentInvites[code])) 
+			resolve (currentInvites[code]);
 		else reject();
 	});
 
