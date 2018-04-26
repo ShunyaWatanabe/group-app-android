@@ -12,7 +12,7 @@ const Schema = mongoose.Schema;
 const groupSchema = mongoose.Schema({
 
 	name: String,
-	members:[{type: Schema.Types.ObjectId, ref: 'user'}],
+	members:[String],
 	conversation: [{type: Schema.Types.ObjectId, ref: 'message'}],
 	created_at: String
 	});
