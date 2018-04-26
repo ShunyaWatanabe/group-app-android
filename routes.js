@@ -196,7 +196,7 @@ module.exports = router => {
 						console.log(groupObject);
 						console.log(userObject);
 						console.log(userObject._id);
-						console.log(groupObject.members);
+						console.log(groupObject.members[0]==userObject._id);
 										//here it does ot work
 						if(!(groupObject.members.includes(userObject._id))){
 						
