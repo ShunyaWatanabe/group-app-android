@@ -198,7 +198,7 @@ module.exports = router => {
 
 			user.findOne({'private_key':req.body[0]},function(err,userObject){
 				if (err) console.log(err);
-				userObject.groups_participated = doc.groups_participated.filter(function(item){
+				userObject.groups_participated = userObject.groups_participated.filter(function(item){
 					
 					return !(item==req.body[1]);
 				});
@@ -206,7 +206,7 @@ module.exports = router => {
 
 				group.findOne({"_id":req.body[1]},function(err,groupObject){
 					if (err) console.log(err);
-					groupObject.members = doc.members.filter(function(user){
+					groupObject.members = groupObject.members.filter(function(user){
 						console.log(user==userObject._id);
 						return !(user==userObject._id);
 					});
