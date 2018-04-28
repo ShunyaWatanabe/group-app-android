@@ -242,7 +242,7 @@ module.exports = router => {
 		create.createGroupFromUsers(req.body)
 		.then(result => {
 			console.log("In result");
-			res.status(result.status).json({ message: result.message, id:result.group_id});
+			res.status(result.status).json({ message: result.message, id:result.id});
 		})
 		.catch(err => res.status(err.status).json({ message: err.message }));
 	});
