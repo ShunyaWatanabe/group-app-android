@@ -34,7 +34,7 @@ exports.createGroup = (user) =>
 
 			const newGroup = new group({
 				name: "New Group",
-				members:[usersArray]，
+				members:usersArray，
 				created_at: new Date(),
 				isVerified: true
 			});
@@ -42,11 +42,11 @@ exports.createGroup = (user) =>
 			newGroup.save()
 			.then(() => {
 				//shoudl retrun more here todo
-				resolve({ status: 201, message: 'Group created!'})
+				resolve({ status: 201, message: 'Group created!', group_id:_id })
 			})
 			.catch(err => {
 				if (err.code == 11000) {
-					reject({ status: 409, message: 'Group Already Registered !' });
+					reject({ status: 409, message: 'Group Already Registered !'});
 				} else {
 					reject({ status: 500, message: 'Internal Server Error !' });
 				}
