@@ -31,6 +31,7 @@ exports.createGroup = (user) =>
 
 	exports.createGroupFromUsers = (usersArray) =>
 		new Promise((resolve,reject) => {
+			console.log("In promise");
 
 			const newGroup = new group({
 				name: "New Group",
@@ -38,10 +39,14 @@ exports.createGroup = (user) =>
 				isVerified: true
 			});
 
+			console.log("Group formed");
+
 			newGroup.save()
 			.then(() => {
-
+				console.log("Mapping");
+				console.log("Array",usersArray);
 				usersArray.map(function(user){
+					console.log("array in ",user);
 					group.members.push(user.key);
 				});
 

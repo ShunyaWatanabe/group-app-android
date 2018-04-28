@@ -237,8 +237,10 @@ module.exports = router => {
 
 	//create group from array of users ID
 	router.post('/groups/newgroupfromanterchamber', (req, res) => {
+		console.log("Creating new group...");
 		create.createGroupFromUsers(req.body.users)
 		.then(result => {
+			console.log("In result");
 			res.status(result.status).json({ message: result.message, id:result.group_id});
 		})
 		.catch(err => res.status(err.status).json({ message: err.message }));
