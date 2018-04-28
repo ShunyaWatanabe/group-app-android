@@ -287,6 +287,7 @@ module.exports = router => {
 	//download single group upon login
 	router.get('/groups/:getgroup', (req, res) =>{
 		console.log("router to getgroup");
+		console.log('private_key',req.params.getgroup);
 		group.findOne({'private_key':req.params.getgroup},function(err,group){
 			if (err) console.log(err);
 			console.log("Group found",group);
