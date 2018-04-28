@@ -52,7 +52,9 @@ exports.createGroup = (user) =>
 				});
 
 				//shoudl retrun more here todo
-				resolve({ status: 201, message: 'Group created!', groupID:newGroup._id })
+				console.log("New Group",newGroup);
+				console.log("New Group2",newGroup._id);
+				resolve({ status: 201, message: 'Group created!', id:newGroup._id })
 			})
 			.catch(err => {
 				if (err.code == 11000) {
