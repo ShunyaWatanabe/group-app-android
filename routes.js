@@ -290,7 +290,7 @@ module.exports = router => {
 		group.findOne({'private_key':req.params.getgroup},function(err,group){
 			if (err) console.log(err);
 			console.log("Group found",group);
-			res.status(201).json(group});
+			res.status(201).json(group);
 		})
 		.catch(err=> {
 			res.status(err.status).json({ message: err.message })
