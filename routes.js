@@ -297,14 +297,6 @@ module.exports = router => {
 		});
 	});
 
-	// find each person with a last name matching 'Ghost', selecting the `name` and `occupation` fields
-Person.findOne({ 'name.last': 'Ghost' }, 'name occupation', function (err, person) {
-  if (err) return handleError(err);
-  // Prints "Space Ghost is a talk show host".
-  console.log('%s %s is a %s.', person.name.first, person.name.last,
-    person.occupation);
-});
-
 	//get invitation code
 	router.get('/groups/invite/:getinvitationcode', (req, res) =>{
 		console.log("router to invitation");
