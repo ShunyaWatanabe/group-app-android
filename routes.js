@@ -239,7 +239,7 @@ module.exports = router => {
 	router.post('/groups/newgroupfromanterchamber', (req, res) => {
 		console.log("Creating new group...");
 		console.log("Body",req.body);
-		create.createGroupFromUsers(req.body.users)
+		create.createGroupFromUsers(req.body)
 		.then(result => {
 			console.log("In result");
 			res.status(result.status).json({ message: result.message, id:result.group_id});
