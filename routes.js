@@ -288,10 +288,10 @@ module.exports = router => {
 	router.get('/groups/get/:getsinglegroup', (req, res) =>{
 		console.log("getting single group");
 		console.log('private_key',req.params.getsinglegroup);
-		group.findOne({'private_key':req.params.getsinglegroup},function(err,group){
+		group.findOne({'private_key':req.params.getsinglegroup},function(err,obj){
 			if (err) console.log(err);
-			console.log("Group found",group);
-			res.status(201).json(group);
+			console.log("Group found",obj);
+			res.status(201).json(obj);
 		})
 		.catch(err=> {
 			res.status(err.status).json({ message: err.message })
