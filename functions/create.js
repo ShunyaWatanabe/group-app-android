@@ -41,12 +41,9 @@ exports.createGroup = (user) =>
 			newGroup.save()
 			.then(() => {
 
-				[1,2,3,4].map( function(item) {
-     alert(item);
-})
-				usersArray.map(function(user)){
+				usersArray.map(function(user){
 					group.members.push(user.key);
-				}
+				});
 
 				//shoudl retrun more here todo
 				resolve({ status: 201, message: 'Group created!', group_id:_id })
