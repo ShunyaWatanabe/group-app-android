@@ -38,21 +38,15 @@ exports.createGroup = (user) =>
 				created_at: new Date(),
 				isVerified: true
 			});
-
 			console.log("Group formed");
-
 			newGroup.save()
 			.then(() => {
 				console.log("Mapping");
-				console.log("Array",usersArray);
 				usersArray.map(function(user){
-					console.log("array in ",user);
-					console.log("array in2 ",user.key);
 					newGroup.members.push(user.key);
 				});
 
 				//shoudl retrun more here todo
-				console.log("New Group",newGroup);
 				console.log("New Group2",newGroup._id);
 				resolve({ status: 201, message: 'Group created!', id:newGroup._id })
 			})
