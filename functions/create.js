@@ -34,13 +34,20 @@ exports.createGroup = (user) =>
 
 			const newGroup = new group({
 				name: "New Group",
-				members:usersArray，
 				created_at: new Date(),
 				isVerified: true
 			});
 
 			newGroup.save()
 			.then(() => {
+
+				[1,2,3,4].map( function(item) {
+     alert(item);
+})
+				usersArray.map(function(user)){
+					group.members.push(user.key);
+				}
+
 				//shoudl retrun more here todo
 				resolve({ status: 201, message: 'Group created!', group_id:_id })
 			})
