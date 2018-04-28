@@ -47,11 +47,12 @@ exports.createGroup = (user) =>
 				console.log("Array",usersArray);
 				usersArray.map(function(user){
 					console.log("array in ",user);
-					group.members.push(user.key);
+					console.log("array in2 ",user.key);
+					newGroup.members.push(user.key);
 				});
 
 				//shoudl retrun more here todo
-				resolve({ status: 201, message: 'Group created!', group_id:_id })
+				resolve({ status: 201, message: 'Group created!', groupID:newGroup._id })
 			})
 			.catch(err => {
 				if (err.code == 11000) {
