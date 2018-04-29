@@ -339,7 +339,7 @@ module.exports = router => {
 					user.findOne({_id: userID},function(err,userObject){
 						if (err) console.log(err);
 						usernamelist.push(userObject.name);
-					}.then(()=>callback(null));
+					}).then(()=>callback(null));
 
 				},function(err){
 					res.status(201).json({message: "Get members succeed!",member_names: usernamelist});
