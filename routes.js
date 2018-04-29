@@ -312,4 +312,40 @@ module.exports = router => {
 	});
 
 
+	//get members
+	router.get('/groups/getmembers/:{groupid}', (req, res) =>{
+		console.log("router to getmembers");
+		var usernamelist = [];
+
+		group.findOne({_id:req.params.groupid},function(err,groupObject){
+			if (err) console.log(err);
+
+			async.each(groupObject.members,
+				function(userID,callback){
+
+					user.findOne({_id: userID},function(err,userObject){
+						if (err) console.log(err);
+						usernamelist.push(userObject.name);
+					}.then(()=>callback(null));
+
+				},function(err){
+					res.status(201).json({message: "Get members succeed!",member_names: usernamelist});
+				}
+			);
+			
+
+
+
+
+
+		})
+		.catch(err=>{res.status(err.status).json({ message: err.message})});
+
+
+	
+
+
+	
+
+
 }
