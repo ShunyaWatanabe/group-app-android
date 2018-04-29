@@ -207,7 +207,7 @@ module.exports = router => {
 				group.findOne({"_id":req.body[1]},function(err,groupObject){
 					if (err) console.log(err);
 					groupObject.members = groupObject.members.filter(function(user){
-						console.log(user==userObject._id);
+						
 						return !(user==userObject._id);
 					});
 					groupObject.save(function(err){if (err) console.log(err);});
