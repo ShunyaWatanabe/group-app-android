@@ -330,33 +330,33 @@ module.exports = router => {
 		console.log("router to getmembers");
 		var usernamelist = [];
 
-		// group.findOne({_id:req.params.groupid},function(err,groupObject){
-		// 	if (err) console.log(err);
+		group.findOne({_id:req.params.groupid},function(err,groupObject){
+			if (err) console.log(err);
 
 			
-		// 	async.each(groupObject.members,
-		// 		function(userID,callback){
+			async.each(groupObject.members,
+				function(userID,callback){
 
-		// 			user.findOne({_id: userID},function(err,userObject){
-		// 				if (err) console.log(err);
-		// 				usernamelist.push(userObject.name);
-		// 			})
-		// 			.then(()=>callback(null));
+					user.findOne({_id: userID},function(err,userObject){
+						if (err) console.log(err);
+						usernamelist.push(userObject.name);
+					})
+					.then(()=>callback(null));
 
-		// 		},function(err){
-		// 			res.status(201).json({message: "Get members succeed!",member_names: usernamelist});
-		// 		}
-		// 	);
+				},function(err){
+					res.status(201).json({message: "Get members succeed!",member_names: usernamelist});
+				}
+			);
 			
 
 
 
 
 
-		// })
-		// .catch(err=>{res.status(err.status).json({ message: err.message})});
+		})
+		.catch(err=>{res.status(err.status).json({ message: err.message})});
 
-	}
+	});
 	
 
 
