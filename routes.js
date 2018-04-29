@@ -92,20 +92,20 @@ module.exports = router => {
 	//add a new user
 	router.post('/users/signup', (req, res) => {
 
-		console.log("Name: " + req.body.name); 
+		console.log("Name: " + req.body.name);
 		const name = req.body.name;
-		
+
 		if (!name  || !name.trim()) {
 			console.log("error");
 			res.status(400).json({message: 'Invalid Request !'});
-		} 
+		}
 
 		//WE NEED TO LOG IN BY PRIVATE KEY HERE
 
 		// else if (user.find({private_key:name}).length!=0){
 		// 	//log in private key
 		// }
-		
+
 		else {
 			register.registerUser(req)
 			.then(result => {
@@ -145,7 +145,7 @@ module.exports = router => {
 	});
 
 	//join group operation
-	router.post('/groups/joininvite', (req, res) => {	
+	router.post('/groups/joininvite', (req, res) => {
 		const groupID = null;
 
 		console.log(req.body);
@@ -156,25 +156,25 @@ module.exports = router => {
 			try{
 				user.findOne({private_key: req.body[0]},function(err,userObject){
 					if (err) console.log(err);
-				
+
 
 					if(!(userObject.groups_participated.includes(groupID))){
 						userObject.groups_participated.push(groupID);
 						userObject.save();
 					}
-					
+
 					group.findOne({_id:groupID},function(err,groupObject){
 						if (err) console.log(err);
-			
-									
+
+
 						if(!(groupObject.members.includes(userObject._id.toString()))){
-						
+
 							groupObject.members.push(userObject._id.toString());
 							groupObject.save();
 						}
 					})
 					.then(()=>{
-					
+
 						res.status(201).json({message: "Join Successful"});
 						//we might have to return more
 					})
@@ -187,19 +187,19 @@ module.exports = router => {
 			console.log("not found");
 			res.status(404).json({ message: "Invitation Not Found"});
 		});
-	
+
 	});
 
 	//user leave group
 	router.post('/groups/leavegroup', (req, res) =>{
 		console.log("router to leavegroup");
-		
+
 		if (mongoose.Types.ObjectId.isValid(req.body[1])){
 
 			user.findOne({'private_key':req.body[0]},function(err,userObject){
 				if (err) console.log(err);
 				userObject.groups_participated = userObject.groups_participated.filter(function(item){
-					
+
 					return !(item==req.body[1]);
 				});
 				userObject.save(function(err){if (err) console.log(err);});
@@ -213,9 +213,9 @@ module.exports = router => {
 					groupObject.save(function(err){if (err) console.log(err);});
 
 				});
-				
-				res.status(201).json({message: "remove succeed!" ,id: req.body[1]});	
-				
+
+				res.status(201).json({message: "remove succeed!" ,id: req.body[1]});
+
 			})
 			.catch(err=> {
 				res.status(err.status).json({ message: err.message });
@@ -227,10 +227,22 @@ module.exports = router => {
 
 
 	//create group operation
-	router.post('/groups/newgroup', (req, res) => {	
+	router.post('/groups/newgroup', (req, res) => {
 		create.createGroup(req.body.user)
 		.then(result => {
 			res.status(result.status).json({ message: result.message});
+		})
+		.catch(err => res.status(err.status).json({ message: err.message }));
+	});
+
+	//create group from array of users ID
+	router.post('/groups/newgroupfromanterchamber', (req, res) => {
+		console.log("Creating new group...");
+		console.log("Body",req.body);
+		create.createGroupFromUsers(req.body)
+		.then(result => {
+			console.log("In result");
+			res.status(result.status).json({ message: result.message, id:result.id});
 		})
 		.catch(err => res.status(err.status).json({ message: err.message }));
 	});
@@ -248,7 +260,7 @@ module.exports = router => {
 		.catch(err => res.status(err.status).json({ message: err.message }));
 	});
 
-	//download group upon login
+	//download groups upon login
 	router.get('/groups/:getgroups', (req, res) =>{
 		console.log("router to getgroups");
 		var groupslist = [];
@@ -262,20 +274,34 @@ module.exports = router => {
 					})
 					.then(()=>callback(null));
 				},
-				function(err){ 
+				function(err){
 					res.status(201).json({message: "Get group succeed!",groups: groupslist});
 				}
 			);
 		})
 		.catch(err=> {
 			res.status(err.status).json({ message: err.message })
-		});		
+		});
+	});
+
+	//download single group upon login
+	router.get('/groups/get/:getsinglegroup', (req, res) =>{
+		console.log("getting single group");
+		console.log('private_key',req.params.getsinglegroup);
+		group.findOne({_id:req.params.getsinglegroup},function(err,obj){
+			if (err) console.log(err);
+			console.log("Group found",obj);
+			res.status(201).json(obj);
+		})
+		.catch(err=> {
+			res.status(err.status).json({ message: err.message })
+		});
 	});
 
 	//get invitation code
 	router.get('/groups/invite/:getinvitationcode', (req, res) =>{
 		console.log("router to invitation");
-		
+
 		invite.getNewInvite(req.params.getinvitationcode)
 		.then(result =>{
 			res.status(201).json({message: result});
