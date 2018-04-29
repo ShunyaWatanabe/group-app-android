@@ -307,6 +307,8 @@ module.exports = router => {
 			res.status(201).json(obj);
 		})
 		.catch(err=> {
+			console.log("error gets here");
+			console.log(err.message);
 			res.status(err.status).json({ message: err.message })
 		});
 	});
@@ -332,8 +334,6 @@ module.exports = router => {
 
 		group.findOne({_id:req.params.groupid},function(err,groupObject){
 			if (err) console.log(err);
-
-			
 			async.each(groupObject.members,
 				function(userID,callback){
 
@@ -347,12 +347,7 @@ module.exports = router => {
 					res.status(201).json({message: "Get members succeed!",member_names: usernamelist});
 				}
 			);
-			
-
-
-
-
-
+	
 		})
 		.catch(err=>{res.status(err.status).json({ message: err.message})});
 
