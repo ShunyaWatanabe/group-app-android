@@ -260,6 +260,19 @@ module.exports = router => {
 		.catch(err => res.status(err.status).json({ message: err.message }));
 	});
 
+	//change addGroup
+	router.post('/users/addGroup', (req, res) => {
+		console.log("router to changeUserName");
+
+		user.findOne({'private_key':req.body[1]},function(err,obj){
+			if (err) console.log(err);
+			obj.groups_participated.push(req.body[0]);
+			obj.save(function(err){if (err) console.log(err);});
+			res.status(201).json({message:req.body[0]});
+		})
+		.catch(err => res.status(err.status).json({ message: err.message }));
+	});
+
 	//download groups upon login
 	router.get('/groups/:getgroups', (req, res) =>{
 		console.log("router to getgroups");

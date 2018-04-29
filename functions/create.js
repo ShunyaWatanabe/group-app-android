@@ -38,13 +38,16 @@ exports.createGroup = (user) =>
 				created_at: new Date(),
 				isVerified: true
 			});
+			console.log("Mapping");
+			console.log("Array",usersArray);
+			usersArray.map(function(user){
+				console.log("user key being added",user.key);
+				newGroup.members.push(user.key);
+			});
 			console.log("Group formed");
 			newGroup.save()
 			.then(() => {
-				console.log("Mapping");
-				usersArray.map(function(user){
-					newGroup.members.push(user.key);
-				});
+
 
 				//shoudl retrun more here todo
 				console.log("New Group2",newGroup._id);
