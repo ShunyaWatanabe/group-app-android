@@ -49,6 +49,7 @@ exports.createGroup = (user) =>
 				// 	console.log("User found",obj);
 					// var result = createResponse(obj);
 					// console.log("Response", result);
+					console.log("User's id",user.key);
 					newGroup.members.push(user.key);
 				// })
 				// .catch(err=> {
