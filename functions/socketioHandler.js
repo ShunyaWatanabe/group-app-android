@@ -31,6 +31,15 @@ exports.ioConnections = io => {
 
 }
 
+function updateGroupConversation(object){
+	let query = { '_id' : object.groupId};
+	let newGroup = group.findOne(query);
+	if (newGroup){
+		newGroup.conversation.add(object.message);
+		newGroup.save();
+	}
+}
+
 function addToDB(object){
 	let date = new Date();
 	let currentTime = date.getTime();
@@ -45,11 +54,3 @@ function addToDB(object){
 	newMessage.save();
 }
 
-function updateGroupConversation(object){
-	let query = { '_id' : object.groupId};
-	let newGroup = group.findOne(query);
-	if (newGroup){
-		newGroup.conversation.add(object.message);
-		newGroup.save();
-	}
-}
