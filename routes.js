@@ -207,7 +207,7 @@ module.exports = router => {
 				group.findOne({"_id":req.body[1]},function(err,groupObject){
 					if (err) console.log(err);
 					groupObject.members = groupObject.members.filter(function(user){
-						console.log(user==userObject._id);
+
 						return !(user==userObject._id);
 					});
 					groupObject.save(function(err){if (err) console.log(err);});
@@ -260,6 +260,19 @@ module.exports = router => {
 		.catch(err => res.status(err.status).json({ message: err.message }));
 	});
 
+	//change addGroup
+	router.post('/users/addGroup', (req, res) => {
+		console.log("router to changeUserName");
+
+		user.findOne({'private_key':req.body[1]},function(err,obj){
+			if (err) console.log(err);
+			obj.groups_participated.push(req.body[0]);
+			obj.save(function(err){if (err) console.log(err);});
+			res.status(201).json({message:"Success!"});
+		})
+		.catch(err => res.status(err.status).json({ message: err.message }));
+	});
+
 	//download groups upon login
 	router.get('/groups/:getgroups', (req, res) =>{
 		console.log("router to getgroups");
@@ -291,12 +304,29 @@ module.exports = router => {
 		group.findOne({_id:req.params.getsinglegroup},function(err,obj){
 			if (err) console.log(err);
 			console.log("Group found",obj);
+			// var result = createResponse(obj);
+			// console.log("Response", result);
 			res.status(201).json(obj);
 		})
 		.catch(err=> {
+			console.log("error gets here");
+			console.log(err.message);
 			res.status(err.status).json({ message: err.message })
 		});
 	});
+
+// 	profile.getProfile(req.params.getsinglegroup)
+//
+// 	.then(result1 =>{
+// 		console.log("Found him");
+//
+// 		 result1 = createResponse(result, result1);
+//
+// 		 res.status(result.status).json(result1);
+// 	})
+//
+// 	.catch(err1 => res.status(err1.status).json({ message: err1.message }));
+// })
 
 	//get invitation code
 	router.get('/groups/invite/:getinvitationcode', (req, res) =>{
@@ -310,6 +340,37 @@ module.exports = router => {
 			res.status(err.status).json({ message: err.message })
 		})
 	});
+
+
+	//get members
+	router.get('/groups/getmembers/:{groupid}', (req, res) =>{
+		console.log("router to getmembers");
+		var usernamelist = [];
+
+		group.findOne({_id:req.params.groupid},function(err,groupObject){
+			if (err) console.log(err);
+			async.each(groupObject.members,
+				function(userID,callback){
+
+					user.findOne({_id: userID},function(err,userObject){
+						if (err) console.log(err);
+						usernamelist.push(userObject.name);
+					})
+					.then(()=>callback(null));
+
+				},function(err){
+					res.status(201).json({message: "Get members succeed!",member_names: usernamelist});
+				}
+			);
+
+		})
+		.catch(err=>{res.status(err.status).json({ message: err.message})});
+
+	});
+
+
+
+
 
 
 }
