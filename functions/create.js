@@ -37,7 +37,7 @@ exports.createGroup = (user) =>
 				name: "New Group",
 				created_at: new Date(),
 				isVerified: true,
-				members:{}
+				members:[]
 			});
 			console.log("Mapping");
 			console.log("Array",usersArray);
@@ -49,7 +49,7 @@ exports.createGroup = (user) =>
 				// 	console.log("User found",obj);
 					// var result = createResponse(obj);
 					// console.log("Response", result);
-					newGroup.members.push(user.key);
+					newGroup.members.push(obj._id);
 				// })
 				// .catch(err=> {
 				// 	console.log("error gets here");
