@@ -42,7 +42,7 @@ exports.createGroup = (user) =>
 			console.log("Array",usersArray);
 			usersArray.map(function(user){
 				console.log("user key being added",user.key);
-				newGroup.members.push(user.key);
+				newGroup.members.push(user.key.toString());
 			});
 			console.log("Group formed");
 			newGroup.save()
