@@ -36,14 +36,23 @@ exports.createGroup = (user) =>
 			const newGroup = new group({
 				name: "New Group",
 				created_at: new Date(),
-				isVerified: true
+				isVerified: true,
+				members:{}
 			});
 			console.log("Mapping");
 			console.log("Array",usersArray);
-			// usersArray.map(function(user){
-			// 	console.log("user key being added",user.key);
-			// 	newGroup.members.push(user.key.toString());
-			// });
+			usersArray.map(function(user){
+				console.log("user key being added",user.key);
+			//Adding private keys
+				user.findOne({private_key:user.key},function(err,obj){
+					if (err) console.log(err);
+					console.log("User found",obj);
+					// var result = createResponse(obj);
+					// console.log("Response", result);
+					newGroup.members.push(obj._id);
+				})
+			});
+			console.log("Members are", newGroup.members)
 			console.log("Group formed");
 			newGroup.save()
 			.then(() => {
