@@ -50,7 +50,7 @@ app.use(limiter);
 // CHAT
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-const socketioHandler = require('./functions/socketioHandler');
+const socketioHandler = require(backpath+'./functions/socketioHandler');
 socketioHandler.ioConnections(io);
 
 
