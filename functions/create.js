@@ -44,17 +44,17 @@ exports.createGroup = (user) =>
 			usersArray.map(function(user){
 				console.log("user key being added",user.key);
 			//Adding private keys
-				user.findOne({private_key:user.key},function(err,obj){
-					if (err) console.log(err);
-					console.log("User found",obj);
+				// user.findOne({private_key:user.key},function(err,obj){
+				// 	if (err) console.log(err);
+				// 	console.log("User found",obj);
 					// var result = createResponse(obj);
 					// console.log("Response", result);
-					newGroup.members.push(obj._id);
-				})
-				.catch(err=> {
-					console.log("error gets here");
-					console.log(err.message);
-				});
+					newGroup.members.push(user.key);
+				// })
+				// .catch(err=> {
+				// 	console.log("error gets here");
+				// 	console.log(err.message);
+				// });
 			});
 			console.log("Members are", newGroup.members)
 			console.log("Group formed");
