@@ -35,7 +35,7 @@ function updateGroupConversation(object){
 	let query = { '_id' : object.groupId};
 	let newGroup = group.findOne(query);
 	if (newGroup){
-		newGroup.conversation.add(object.message);
+		newGroup.conversation.push(object.message);
 		newGroup.save();
 	}
 }
