@@ -38,6 +38,7 @@ function updateGroupConversation(object){
 
 	try{
 		group.findOne({_id:object.groupId},function(err,groupObject){
+			
 			groupObject.conversation.push(object.message);
 			groupObject.save();
 		});
@@ -46,19 +47,6 @@ function updateGroupConversation(object){
 
 }
 
-function addToDB(object){
-	let date = new Date();
-	let currentTime = date.getTime();
-
-	const newMessage = new message({
-		group: object.groupId,
-		text: object.message,
-		sender: object.sender,
-		created_at: currentTime
-	});
-				
-	newMessage.save();
-}
 
 
 

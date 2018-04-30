@@ -17,7 +17,6 @@ const userSchema = mongoose.Schema({
 	refresh_token: String,
 	token: String,
 
-	
 	// groups_participated: [{type: Schema.Types.ObjectId, ref: 'group'}]
 	groups_participated: [String]
 });
