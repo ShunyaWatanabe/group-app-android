@@ -207,7 +207,7 @@ module.exports = router => {
 				group.findOne({"_id":req.body[1]},function(err,groupObject){
 					if (err) console.log(err);
 					groupObject.members = groupObject.members.filter(function(user){
-						console.log(user==userObject._id);
+						
 						return !(user==userObject._id);
 					});
 					groupObject.save(function(err){if (err) console.log(err);});
@@ -308,6 +308,8 @@ module.exports = router => {
 			res.status(201).json(result);
 		})
 		.catch(err=> {
+			console.log("error gets here");
+			console.log(err.message);
 			res.status(err.status).json({ message: err.message })
 		});
 	});
@@ -337,6 +339,37 @@ module.exports = router => {
 			res.status(err.status).json({ message: err.message })
 		})
 	});
+
+
+	//get members
+	router.get('/groups/getmembers/:{groupid}', (req, res) =>{
+		console.log("router to getmembers");
+		var usernamelist = [];
+
+		group.findOne({_id:req.params.groupid},function(err,groupObject){
+			if (err) console.log(err);
+			async.each(groupObject.members,
+				function(userID,callback){
+
+					user.findOne({_id: userID},function(err,userObject){
+						if (err) console.log(err);
+						usernamelist.push(userObject.name);
+					})
+					.then(()=>callback(null));
+
+				},function(err){
+					res.status(201).json({message: "Get members succeed!",member_names: usernamelist});
+				}
+			);
+	
+		})
+		.catch(err=>{res.status(err.status).json({ message: err.message})});
+
+	});
+	
+
+
+	
 
 
 }
