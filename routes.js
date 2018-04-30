@@ -306,7 +306,7 @@ module.exports = router => {
 			console.log("Group found",obj);
 			// var result = createResponse(obj);
 			// console.log("Response", result);
-			res.status(201).json({message: obj});
+			res.status(201).json( obj);
 		})
 		.catch(err=> {
 			console.log("error gets here");

@@ -40,10 +40,10 @@ exports.createGroup = (user) =>
 			});
 			console.log("Mapping");
 			console.log("Array",usersArray);
-			usersArray.map(function(user){
-				console.log("user key being added",user.key);
-				newGroup.members.push(user.key.toString());
-			});
+			// usersArray.map(function(user){
+			// 	console.log("user key being added",user.key);
+			// 	newGroup.members.push(user.key.toString());
+			// });
 			console.log("Group formed");
 			newGroup.save()
 			.then(() => {
