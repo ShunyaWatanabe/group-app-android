@@ -343,7 +343,7 @@ module.exports = router => {
 
 
 	//get members
-	router.get('/groups/getmembers/:{groupid}', (req, res) =>{
+	router.get('/groups/getmembers/:groupid', (req, res) =>{
 		console.log("router to getmembers");
 		var usernamelist = [];
 		console.log("test1");
