@@ -346,19 +346,25 @@ module.exports = router => {
 	router.get('/groups/getmembers/:{groupid}', (req, res) =>{
 		console.log("router to getmembers");
 		var usernamelist = [];
+		console.log("test1");
+
 
 		group.findOne({_id:req.params.groupid},function(err,groupObject){
 			if (err) console.log(err);
+			console.log("test1");
 			async.each(groupObject.members,
 				function(userID,callback){
+					console.log("test2");
 
 					user.findOne({_id: userID},function(err,userObject){
 						if (err) console.log(err);
+						console.log("test4");
 						usernamelist.push(userObject.name);
 					})
 					.then(()=>callback(null));
 
 				},function(err){
+					console.log("test3");
 					res.status(201).json({message: "Get members succeed!",member_names: usernamelist});
 				}
 			);
