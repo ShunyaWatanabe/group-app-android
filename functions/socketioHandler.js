@@ -19,6 +19,7 @@ exports.ioConnections = io => {
 		// send a message to the group
 		socket.on('send message', function(object){ 
 		    console.log(' smessage: ' + object.message); 
+		    console.log(object);
 		    socket.broadcast.to(object.groupId).emit('send message', {message: object.message}); 
 		    updateGroupConversation(object);
 		});
@@ -31,7 +32,25 @@ exports.ioConnections = io => {
 
 }
 
+
+
+// try{
+// 			
+// 			group.findOne({_id:groupID},function(err,groupObject){
+// 
+// 				groupObject.save();
+// 						
+// 			})
+// 			.then(()=>{
+
+// 			res.status(201).json({message: "Join Successful"});
+// 						
+// 			})
+//
+// 			}catch(err) {res.status(err.status).json({ message: err.message });};
+
 function updateGroupConversation(object){
+
 	let query = { '_id' : object.groupId};
 	let newGroup = group.findOne(query);
 	if (newGroup){
@@ -53,4 +72,12 @@ function addToDB(object){
 				
 	newMessage.save();
 }
+
+
+
+
+
+
+
+
 
