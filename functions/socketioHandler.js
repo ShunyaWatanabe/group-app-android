@@ -37,7 +37,7 @@ exports.ioConnections = io => {
 function updateGroupConversation(object){
 
 	try{
-		group.findOne({_id:groupID},function(err,groupObject){
+		group.findOne({_id:object.groupId},function(err,groupObject){
 			groupObject.conversation.push(object.message);
 			groupObject.save();
 		});
