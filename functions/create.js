@@ -51,6 +51,10 @@ exports.createGroup = (user) =>
 					// console.log("Response", result);
 					newGroup.members.push(obj._id);
 				})
+				.catch(err=> {
+					console.log("error gets here");
+					console.log(err.message);
+				});
 			});
 			console.log("Members are", newGroup.members)
 			console.log("Group formed");
