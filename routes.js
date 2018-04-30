@@ -207,7 +207,7 @@ module.exports = router => {
 				group.findOne({"_id":req.body[1]},function(err,groupObject){
 					if (err) console.log(err);
 					groupObject.members = groupObject.members.filter(function(user){
-						
+
 						return !(user==userObject._id);
 					});
 					groupObject.save(function(err){if (err) console.log(err);});
@@ -304,7 +304,7 @@ module.exports = router => {
 		group.findOne({_id:req.params.getsinglegroup},function(err,obj){
 			if (err) console.log(err);
 			console.log("Group found",obj);
-			result = createResponse(obj);
+			var result = createResponse(obj);
 			res.status(201).json(result);
 		})
 		.catch(err=> {
@@ -361,15 +361,15 @@ module.exports = router => {
 					res.status(201).json({message: "Get members succeed!",member_names: usernamelist});
 				}
 			);
-	
+
 		})
 		.catch(err=>{res.status(err.status).json({ message: err.message})});
 
 	});
-	
 
 
-	
+
+
 
 
 }
