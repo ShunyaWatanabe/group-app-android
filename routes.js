@@ -308,7 +308,7 @@ module.exports = router => {
 		})
 		.catch(err=> {
 			console.log("error gets here");
-			console.log(err.message);
+			
 			res.status(err.status).json({ message: err.message })
 		});
 	});
