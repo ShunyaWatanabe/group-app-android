@@ -268,7 +268,7 @@ module.exports = router => {
 			if (err) console.log(err);
 			obj.groups_participated.push(req.body[0]);
 			obj.save(function(err){if (err) console.log(err);});
-			res.status(201).json({message:req.body[0]});
+			res.status(201).json({message:"Success!"});
 		})
 		.catch(err => res.status(err.status).json({ message: err.message }));
 	});
@@ -304,12 +304,26 @@ module.exports = router => {
 		group.findOne({_id:req.params.getsinglegroup},function(err,obj){
 			if (err) console.log(err);
 			console.log("Group found",obj);
-			res.status(201).json(obj);
+			result = createResponse(obj);
+			res.status(201).json(result);
 		})
 		.catch(err=> {
 			res.status(err.status).json({ message: err.message })
 		});
 	});
+
+// 	profile.getProfile(req.params.getsinglegroup)
+//
+// 	.then(result1 =>{
+// 		console.log("Found him");
+//
+// 		 result1 = createResponse(result, result1);
+//
+// 		 res.status(result.status).json(result1);
+// 	})
+//
+// 	.catch(err1 => res.status(err1.status).json({ message: err1.message }));
+// })
 
 	//get invitation code
 	router.get('/groups/invite/:getinvitationcode', (req, res) =>{

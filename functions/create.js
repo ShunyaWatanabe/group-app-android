@@ -48,8 +48,6 @@ exports.createGroup = (user) =>
 			newGroup.save()
 			.then(() => {
 
-
-				//shoudl retrun more here todo
 				console.log("New Group2",newGroup._id);
 				resolve({ status: 201, message: 'Group created!', id:newGroup._id })
 			})
